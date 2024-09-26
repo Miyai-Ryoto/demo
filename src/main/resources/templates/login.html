@@ -20,7 +20,7 @@
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/login}" method="post"
             th:object="${loginForm}">
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">ログインID</label>
+                <label class="block text-gray-700 text-sm font-bold mb-2">職員番号</label>
                 <input
                     class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     type="text" th:field="*{loginId}">
@@ -28,7 +28,7 @@
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2">パスワード</label>
                 <input
-                    class="custom-input shadow border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     type="password" th:field="*{password}">
             </div>
             <div>
