@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ public class LoginController {
     
     private final LoginService service;
 
+    private final PasswordEncoder passwordEncoder;
+
     @GetMapping("/login")
     public String view(Model model, LoginForm form) {
          return "login";
@@ -26,7 +29,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(Model model, LoginForm form) {
         var userInfo = service.searchUserById(form.getLoginId());
-        var isCorrectUserAuth = userInfo.isPresent() && form.getPassword().equals(userInfo.get().getPassword());
+        var isCorrectUserAuth = userInfo.isPresent() && passwordEncoder.matches(form.getPassword(), userInfo.get().getPassword());
         if(isCorrectUserAuth){
             return "redirect:/menu";
         }else{
