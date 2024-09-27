@@ -42,6 +42,4 @@ package.json
 tailwind.config.js
 **/src/main/**/static/*.css
 
-### properties ###
-**/src/main/resources/*.properties
 
