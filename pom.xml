@@ -81,9 +81,9 @@
 		</dependency>
 		<!-- Dozer Mapper -->
 		<dependency>
-			<groupId>com.github.dozermapper</groupId>
-			<artifactId>dozer-spring-boot-starter</artifactId>
-			<version>7.0.0</version>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.5.1</version>
 		</dependency>
 		<!-- Spring Security -->
 		<dependency>
