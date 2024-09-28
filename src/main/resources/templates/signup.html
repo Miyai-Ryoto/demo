@@ -38,11 +38,9 @@
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 <div>
                     <p><label>部署：</label>
-                        <select name="department-iteration">
-                            <th:block th:each="department : ${departments}">
-                                <option th:value="${department.id}" th:text="${department.departmentName}"
-                                    th:selected="${active == department.id}"></option>
-                            </th:block>
+                        <select name="departmentId" required>
+                                <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.departmentName}"
+                                    th:selected="${department.id == selectedDepartmentId}"></option>
                         </select>
                 </div>
                 <p><input type="submit" value="ユーザー登録">
