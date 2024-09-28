@@ -36,6 +36,15 @@
                         <input type="password" th:field="*{password}">
                 </div>
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                <div>
+                    <p><label>部署：</label>
+                        <select name="department-iteration">
+                            <th:block th:each="department : ${departments}">
+                                <option th:value="${department.id}" th:text="${department.departmentName}"
+                                    th:selected="${active == department.id}"></option>
+                            </th:block>
+                        </select>
+                </div>
                 <p><input type="submit" value="ユーザー登録">
             </div>
         </form>

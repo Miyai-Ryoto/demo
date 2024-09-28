@@ -14,6 +14,7 @@ import com.example.demo.constant.MessageConst;
 import com.example.demo.constant.SignupMessage;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.SignupForm;
+import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.service.SignupService;
 import com.example.demo.util.AppUtil;
 
@@ -29,6 +30,9 @@ public class SignupController {
 	/** メッセージソース */
 	private final MessageSource messageSource;
 
+    /** 部署レポジトリー */
+    private final DepartmentInfoRepository repository;
+
 	/**
 	 * 初期表示
 	 * 
@@ -38,7 +42,8 @@ public class SignupController {
 	 */
 	@GetMapping("/signup")
 	public String view(Model model, SignupForm form) {
-		return "signup";
+        model.addAttribute("departments", repository.findAll());
+    		return "signup";
 	}
 
 	/**
