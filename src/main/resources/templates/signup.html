@@ -14,8 +14,8 @@
     </style>
 </head>
 
-<body>
-    <div>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="w-full max-w-xs">
         <h2>ユーザー登録画面</h2>
         <div th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
             <svg>
@@ -24,26 +24,35 @@
             </svg>
             <span th:text="${message}"></span>
         </div>
-        <form th:action="@{/signup}" method="post" th:object="${signupForm}">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/signup}" method="post"
+            th:object="${signupForm}">
             <div>
-                <div>
-                    <p><label for="loginId">ログインID：</label>
-                        <input type="text" th:field="*{loginId}">
+                <div class="mb-4">
+                    <p><label class="block text-gray-700 text-sm font-bold mb-2" for="loginId">ログインID</label>
+                        <input
+                            class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" th:field="*{loginId}">
                 </div>
                 <span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
-                <div>
-                    <p><label for="password">パスワード：</label>
-                        <input type="password" th:field="*{password}">
+                <div class="mb-4">
+                    <p><label class="block text-gray-700 text-sm font-bold mb-2" for="password">パスワード</label>
+                        <input
+                            class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="password" th:field="*{password}">
                 </div>
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                <div>
-                    <p><label>部署：</label>
-                        <select name="departmentId" required>
-                                <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.departmentName}"
-                                    th:selected="${department.id == selectedDepartmentId}"></option>
+                <div class="mb-6">
+                    <p><label class="block text-gray-700 text-sm font-bold mb-2">部署</label>
+                        <select
+                            class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            name="departmentId" required>
+                            <option th:each="department : ${departments}" th:value="${department.id}"
+                                th:text="${department.departmentName}"
+                                th:selected="${department.id == selectedDepartmentId}"></option>
                         </select>
                 </div>
-                <p><input type="submit" value="ユーザー登録">
+                <p><input class="custom-input bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        type="submit" value="ユーザー登録">
             </div>
         </form>
         <a th:href="@{/login}">▶ログイン画面へ戻る</a>
