@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>トップメニュー</title>
+    <title>メニュー</title>
+    <link href="/output.css" rel="stylesheet">
+    <style>
+        .custom-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
 </head>
 <body>
+    <div th:replace="~{'common/header' :: header}"></div>
     トップメニューだよ
 </body>
 </html>
