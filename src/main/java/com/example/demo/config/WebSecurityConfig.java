@@ -45,7 +45,8 @@ public class WebSecurityConfig {
 
 		http
                 .authorizeHttpRequests(
-						authorize -> authorize.requestMatchers(UrlConst.NO_AUTHENTICATION).permitAll()
+						authorize -> authorize
+                                .requestMatchers(UrlConst.NO_AUTHENTICATION).permitAll()
 								.anyRequest().authenticated())
              
                 .formLogin(
@@ -70,4 +71,5 @@ public class WebSecurityConfig {
 
 		return provider;
 	}
+
 }
