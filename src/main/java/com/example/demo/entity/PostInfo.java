@@ -25,6 +25,5 @@ public class PostInfo {
     @Column(name = "event_date")
     private LocalDate eventDate;
 
-    // Getters and Setters
 }
 
