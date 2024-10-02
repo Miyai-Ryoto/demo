@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>一覧画面</title>
+    <link href="/output.css" rel="stylesheet">
+    <style>
+        .custom-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{'common/header' :: header}"></div>
+    <h2>一覧画面</h2>
+    <div th:if="${postsList.size() == 0}">
+        登録データが1件もありません。
+    </div>
+    <table th:if="${postsList.size() >= 1}">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>題名</th>
+                <th>本文</th>
+                <th>日付</th>
+            </tr>
+        </thead>
+        <tbody th:each="postInfo : ${postsList}" th:object=${postInfo}>
+            <td th:text="*{id}"></td>
+            <td th:text="*{title}"></td>
+            <td th:text="*{content}"></td>
+            <td th:text="*{eventDate}"></td>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

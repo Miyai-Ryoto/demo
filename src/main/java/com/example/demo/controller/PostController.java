@@ -17,11 +17,11 @@ public class PostController {
 
     private final PostService postService;
 
-    // @GetMapping("/posts")
-    // public String showPosts(Model model) {
-    //     model.addAttribute("posts", postService.findAll());
-    //     return "posts"; // posts.html
-    // }
+    @GetMapping(UrlConst.LIST)
+    public String postsList(Model model) {
+        model.addAttribute("postsList", postService.findAll());
+        return "list"; // posts.html
+    }
 
     @GetMapping(UrlConst.POST)
     public String view(Model model, PostForm form) {
@@ -31,7 +31,7 @@ public class PostController {
     @PostMapping(UrlConst.POST)
     public String createPost(PostForm form) {
         postService.resistPostInfo(form);
-        return "redirect:/menu";
+        return "redirect:/list";
     }
 
 }
