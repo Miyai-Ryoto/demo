@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		var userInfo = repository.findById(username)
+		var userInfo = repository.findByLoginId(username)
 				.orElseThrow(() -> new UsernameNotFoundException(username));
 
 		return User.withUsername(userInfo.getLoginId())

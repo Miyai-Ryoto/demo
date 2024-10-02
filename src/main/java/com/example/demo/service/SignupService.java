@@ -26,7 +26,7 @@ public class SignupService {
 
     public Optional<UserInfo> resistUserInfo(SignupForm form) {
         DepartmentInfo departmentInfo = departmentInfoRepository.findById(form.getDepartmentId()).orElse(null);
-        var userInfoExisteOpt = repository.findById(form.getLoginId());
+        var userInfoExisteOpt = repository.findByLoginId(form.getLoginId());
         if (userInfoExisteOpt.isPresent()){
             return Optional.empty();
         }
