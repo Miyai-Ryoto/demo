@@ -14,6 +14,9 @@ public class UrlConst {
 	/** フォーム画面 */
 	public static final String POST = "/post";
 
+	/** 一覧画面 */
+	public static final String LIST = "/list";
+
 
 	/** 認証不要画面 */
 	public static final String[] NO_AUTHENTICATION = { LOGIN, SIGNUP,"/output.css" };
