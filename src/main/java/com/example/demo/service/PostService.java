@@ -31,13 +31,13 @@ public class PostService {
 
     public void resistPostInfo(PostForm form, User user) {
         for (Long departmentIds : form.getDepartmentId()){
-            DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds).orElse(null);
             PostInfo postInfo = new PostInfo();
             postInfo.setTitle(form.getTitle());
             postInfo.setContent(form.getContent());
             postInfo.setEventDate(form.getEventDate());
             UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
             postInfo.setUserInfo(userInfo);
+            DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds).orElse(null);
             postInfo.setDepartmentInfo(departmentInfo);
             postInfoRepository.save(postInfo);
         }  
