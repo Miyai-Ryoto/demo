@@ -25,8 +25,8 @@ public class PostService {
 
     private final DepartmentInfoRepository departmentInfoRepository;
 
-    public List<PostInfo> findAll() {
-        return postInfoRepository.findAll();
+    public List<PostInfo> getPostsByDepartmentId(DepartmentInfo departmentInfo) {
+        return postInfoRepository.findByDepartmentInfo(departmentInfo);
     }
 
     public void resistPostInfo(PostForm form, User user) {
