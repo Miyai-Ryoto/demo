@@ -23,12 +23,6 @@ public class PostController {
     /** 部署レポジトリー */
     private final DepartmentInfoRepository repository;
 
-    @GetMapping(UrlConst.LIST)
-    public String postsList(Model model) {
-        model.addAttribute("postsList", postService.findAll());
-        return "list"; // posts.html
-    }
-
     @GetMapping(UrlConst.POST)
     public String view(Model model, PostForm form) {
         model.addAttribute("departments", repository.findAll());
