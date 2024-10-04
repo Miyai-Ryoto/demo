@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +31,8 @@ public class PostController {
     }
 
     @PostMapping(UrlConst.POST)
-    public String createPost(PostForm form) {
-        postService.resistPostInfo(form);
+    public String createPost(PostForm form, @AuthenticationPrincipal User user) {
+        postService.resistPostInfo(form, user);
         return "redirect:/list";
     }
 
