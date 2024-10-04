@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,5 +13,7 @@ public class PostForm {
     private String content;
 
     private LocalDate eventDate;
+
+    private List<Long> departmentId;
 
 }

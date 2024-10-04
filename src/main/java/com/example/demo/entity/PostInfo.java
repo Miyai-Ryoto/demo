@@ -32,5 +32,9 @@ public class PostInfo {
     @JoinColumn(name = "user_id")
     private UserInfo userInfo;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private DepartmentInfo departmentInfo;
+
 }
 

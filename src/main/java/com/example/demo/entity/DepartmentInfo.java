@@ -27,5 +27,7 @@ public class DepartmentInfo {
     @OneToMany(mappedBy = "departmentInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserInfo> userInfos;
 
+    @OneToMany(mappedBy = "departmentInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostInfo> postInfos;
 
 }

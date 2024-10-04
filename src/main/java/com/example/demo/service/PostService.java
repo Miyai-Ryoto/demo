@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.PostInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.PostForm;
+import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.repository.PostInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 
@@ -22,18 +23,24 @@ public class PostService {
 
     private final UserInfoRepository userInfoRepository;
 
+    private final DepartmentInfoRepository departmentInfoRepository;
+
     public List<PostInfo> findAll() {
         return postInfoRepository.findAll();
     }
 
     public void resistPostInfo(PostForm form, User user) {
-        PostInfo postInfo = new PostInfo();
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        postInfo.setTitle(form.getTitle());
-        postInfo.setContent(form.getContent());
-        postInfo.setEventDate(form.getEventDate());
-        postInfo.setUserInfo(userInfo);
-        postInfoRepository.save(postInfo);
+        for (Long departmentIds : form.getDepartmentId()){
+            DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds).orElse(null);
+            PostInfo postInfo = new PostInfo();
+            postInfo.setTitle(form.getTitle());
+            postInfo.setContent(form.getContent());
+            postInfo.setEventDate(form.getEventDate());
+            UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+            postInfo.setUserInfo(userInfo);
+            postInfo.setDepartmentInfo(departmentInfo);
+            postInfoRepository.save(postInfo);
+        }  
     }
 
 }
