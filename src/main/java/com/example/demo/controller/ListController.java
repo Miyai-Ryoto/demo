@@ -30,4 +30,11 @@ public class ListController {
         return "list";
     }
 
+    @GetMapping(UrlConst.REQUEST)
+    public String requestView(Model model, @AuthenticationPrincipal User user) {
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+        model.addAttribute("requestsList", listService.getPostaByUserId(userInfo));
+        return "request";
+    }
+
 }
