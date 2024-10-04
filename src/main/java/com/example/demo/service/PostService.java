@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.List;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,6 @@ public class PostService {
 
     private final DepartmentInfoRepository departmentInfoRepository;
 
-    public List<PostInfo> getPostsByDepartmentId(DepartmentInfo departmentInfo) {
-        return postInfoRepository.findByDepartmentInfo(departmentInfo);
-    }
 
     public void resistPostInfo(PostForm form, User user) {
         for (Long departmentIds : form.getDepartmentId()){

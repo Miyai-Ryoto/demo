@@ -10,7 +10,7 @@ import com.example.demo.constant.UrlConst;
 import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.UserInfoRepository;
-import com.example.demo.service.PostService;
+import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ListController {
 
-    private final PostService postService;
+    private final ListService listService;
 
     private final UserInfoRepository userInfoRepository;
 
@@ -26,7 +26,7 @@ public class ListController {
     public String view(Model model, @AuthenticationPrincipal User user) {
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
-        model.addAttribute("postsList", postService.getPostsByDepartmentId(departmentInfo));
+        model.addAttribute("postsList", listService.getPostsByDepartmentId(departmentInfo));
         return "list";
     }
 
