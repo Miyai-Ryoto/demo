@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.constant.UrlConst;
 import com.example.demo.form.PostForm;
+import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,9 @@ public class PostController {
 
     private final PostService postService;
 
+    /** 部署レポジトリー */
+    private final DepartmentInfoRepository repository;
+
     @GetMapping(UrlConst.LIST)
     public String postsList(Model model) {
         model.addAttribute("postsList", postService.findAll());
@@ -27,6 +31,7 @@ public class PostController {
 
     @GetMapping(UrlConst.POST)
     public String view(Model model, PostForm form) {
+        model.addAttribute("departments", repository.findAll());
         return "post";
     }
 

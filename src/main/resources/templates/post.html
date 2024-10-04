@@ -31,6 +31,13 @@
         <input type="text" th:field="*{eventDate}">
         <br><br>
 
+        <label>宛先:</label>
+        <select multiple name="departmentId" required>
+            <option th:each="department : ${departments}" th:value="${department.id}"
+                th:text="${department.departmentName}" th:selected="${department.id == selectedDepartmentId}"></option>
+        </select>
+        <br><br>
+
         <button type="submit">送信</button>
     </form>
 
