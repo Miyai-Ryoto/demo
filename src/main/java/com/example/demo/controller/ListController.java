@@ -5,14 +5,17 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.constant.UrlConst;
 import com.example.demo.entity.DepartmentInfo;
+import com.example.demo.entity.PostInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -36,5 +39,13 @@ public class ListController {
         model.addAttribute("requestsList", listService.getPostaByUserId(userInfo));
         return "request";
     }
+
+    @GetMapping("/list/{id}")
+    public String postView(Model model, @PathVariable Long id) {
+        PostInfo postInfo = listService.getPostById(id);
+        model.addAttribute("postInfo", postInfo);
+        return "postDetail";
+    }
+    
 
 }

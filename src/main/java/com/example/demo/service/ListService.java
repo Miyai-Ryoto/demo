@@ -24,4 +24,8 @@ public class ListService {
         return postInfoRepository.findByUserInfo(userInfo);
     }
 
+    public PostInfo getPostById(Long id){
+        return postInfoRepository.findById(id).orElse(null);
+    }
+
 }
