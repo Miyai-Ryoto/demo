@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class DraftInfo {
+public class PostsInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
