@@ -30,10 +30,12 @@
             </tr>
         </thead>
         <tbody th:each="postInfo : ${postsList}" th:object=${postInfo}>
-            <td th:text="*{id}"></td>
-            <td th:text="*{title}"></td>
-            <td th:text="*{content}"></td>
-            <td th:text="*{eventDate}"></td>
+            <tr style="cursor: pointer;" th:onclick="'location.href=\'/details/' + ${postInfo.id} + '\';'">
+                <td th:text="*{id}"></td>
+                <td th:text="*{title}"></td>
+                <td th:text="*{content}"></td>
+                <td th:text="*{eventDate}"></td>
+            </tr>
         </tbody>
     </table>
 
