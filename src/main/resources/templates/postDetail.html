@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>投稿詳細画面</title>
@@ -12,6 +13,7 @@
         }
     </style>
 </head>
+
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <h1>投稿詳細画面</h1>
@@ -24,6 +26,14 @@
     <div th:if="${postInfo == null}">
         <p>登録データーはありません</p>
     </div>
+    <h2>回答</h2>
+    <form th:action="@{/list/{postInfoId}/answer(postInfoId=${postInfo.id})}" method="post" th:object="answerForm">
+        <label for="content">本文:</label>
+        <input type="text" th:field="*{content}">
+        <br><br>
+        <button type="submit">回答</button>
+    </form>
     <a th:href="@{/list}">▶投稿一覧画面へ戻る</a>
 </body>
+
 </html>
