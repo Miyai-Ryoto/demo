@@ -28,6 +28,6 @@ public class DepartmentInfo {
     private List<UserInfo> userInfos;
 
     @OneToMany(mappedBy = "departmentInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostsInfo> draftInfos;
+    private List<PostsInfo> postsInfos;
 
 }

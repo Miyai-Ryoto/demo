@@ -36,7 +36,7 @@ public class PostInfo {
     private UserInfo userInfo;
 
     @OneToMany(mappedBy = "postInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostsInfo> draftInfos;
+    private List<PostsInfo> postsInfos;
 
 }
 
