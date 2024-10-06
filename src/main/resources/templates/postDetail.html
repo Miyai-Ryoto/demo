@@ -26,13 +26,13 @@
     <div th:if="${postInfo == null}">
         <p>登録データーはありません</p>
     </div>
-    <!-- <h2>回答</h2>
-    <form th:action="@{/list/{postInfoId}/answer(postInfoId=${postInfo.id})}" method="post" th:object="answerForm">
+    <h2>回答</h2>
+    <form th:action="@{/list/{postInfoId}/answer(postInfoId=${postInfo.id})}" method="post" th:object="${answerForm}">
         <label for="content">本文:</label>
         <input type="text" th:field="*{content}">
         <br><br>
         <button type="submit">回答</button>
-    </form> -->
+    </form>
     <a th:href="@{/list}">▶投稿一覧画面へ戻る</a>
 </body>
 

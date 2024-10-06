@@ -11,6 +11,7 @@ import com.example.demo.constant.UrlConst;
 import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.PostInfo;
 import com.example.demo.entity.UserInfo;
+import com.example.demo.form.AnswerForm;
 import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.service.ListService;
 
@@ -41,7 +42,7 @@ public class ListController {
     }
 
     @GetMapping("/list/{id}")
-    public String postView(Model model, @PathVariable Long id) {
+    public String postView(Model model, @PathVariable Long id, AnswerForm answerForm) {
         PostInfo postInfo = listService.getPostById(id);
         model.addAttribute("postInfo", postInfo);
         return "postDetail";
