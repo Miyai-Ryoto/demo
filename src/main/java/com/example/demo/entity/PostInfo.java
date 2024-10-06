@@ -38,5 +38,8 @@ public class PostInfo {
     @OneToMany(mappedBy = "postInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostsInfo> postsInfos;
 
+    @OneToMany(mappedBy = "postInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AnswerInfo> answerInfos;
+
 }
 
