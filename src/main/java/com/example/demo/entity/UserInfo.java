@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -34,6 +35,9 @@ public class UserInfo {
 
     @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostInfo> postInfo;
+
+    @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AnswerInfo> answerInfos;
 
 
 }
