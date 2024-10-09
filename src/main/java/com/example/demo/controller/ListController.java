@@ -42,9 +42,12 @@ public class ListController {
     }
 
     @GetMapping("/list/{id}")
-    public String postView(Model model, @PathVariable Long id, AnswerForm answerForm) {
+    public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm answerForm) {
         PostInfo postInfo = listService.getPostById(id);
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+        DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
         model.addAttribute("postInfo", postInfo);
+        model.addAttribute("userLists", userInfoRepository.findByDepartmentInfo(departmentInfo));
         return "postDetail";
     }
     
