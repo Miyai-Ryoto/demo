@@ -42,4 +42,8 @@ public class UserInfo {
     @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ResponsibleInfo> responsibleInfos;
 
+    @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostsInfo> postsInfos;
+
+
 }
