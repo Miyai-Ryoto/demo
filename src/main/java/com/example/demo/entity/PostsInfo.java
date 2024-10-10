@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import com.example.demo.constant.PostCondition;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,5 +32,13 @@ public class PostsInfo {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserInfo userInfo;
+
+    @Column(name = "post_condition")
+    private boolean condition;
+
+
+    public PostCondition getStatus(){
+        return PostCondition.fromBoolean(condition);
+    }
 
 }

@@ -23,6 +23,7 @@
     <table th:if="${postsList.size() >= 1}">
         <thead>
             <tr>
+                <th>回答状況</th>
                 <th>id</th>
                 <th>題名</th>
                 <th>本文</th>
@@ -31,6 +32,7 @@
         </thead>
         <tbody th:each="postsInfo : ${postsList}" th:object=${postsInfo}>
             <tr style="cursor: pointer;" th:onclick="'location.href=\'/list/' + ${postsInfo.id} + '\';'">
+                <td th:text="${postsInfo.status.postMessage}"></td>
                 <td th:text="${postsInfo.id}"></td>
                 <td th:text="${postsInfo.postInfo.title}"></td>
                 <td th:text="${postsInfo.postInfo.content}"></td>

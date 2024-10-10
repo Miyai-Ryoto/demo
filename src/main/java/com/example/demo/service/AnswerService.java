@@ -32,6 +32,9 @@ public class AnswerService {
         PostsInfo postsInfo = postsInfoRepository.findById(id).orElse(null);
         answerInfo.setPostInfo(postsInfo.getPostInfo());
         answerInfoRepository.save(answerInfo);
+        postsInfo.setCondition(true);
+        postsInfoRepository.save(postsInfo);
+
     }
 
 }
