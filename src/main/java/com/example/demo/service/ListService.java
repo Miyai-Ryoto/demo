@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.DepartmentInfo;
@@ -10,6 +11,7 @@ import com.example.demo.entity.PostsInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.PostInfoRepository;
 import com.example.demo.repository.PostsInfoRepository;
+import com.example.demo.repository.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,22 +23,27 @@ public class ListService {
 
     private final PostsInfoRepository postsInfoRepository;
 
-    public List<PostInfo> getPostsByDepartmentId(DepartmentInfo departmentInfo) {
-        List<PostsInfo> postsInfo = postsInfoRepository.findByDepartmentInfo(departmentInfo);
-        List<PostInfo> postInfos = new ArrayList<PostInfo>();
-        for(PostsInfo postId : postsInfo){
-            postInfos.add(postId.getPostInfo());
-        }
-        return postInfos;
+    private final UserInfoRepository userInfoRepository;
+
+    public List<PostsInfo> getPostListByDepartmentId(User user) {
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+        DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
+        return postsInfoRepository.findByDepartmentInfo(departmentInfo);
     }
 
-
-    public List<PostInfo> getPostaByUserId(UserInfo userInfo){
+    public List<PostInfo> getPostListByUserId(User user){
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         return postInfoRepository.findByUserInfo(userInfo);
     }
 
-    public PostInfo getPostById(Long id){
-        return postInfoRepository.findById(id).orElse(null);
+    public PostsInfo getPostById(Long id){
+        return postsInfoRepository.findById(id).orElse(null);
+    }
+
+    public List<UserInfo> getUserListByDepartmentId(User user){
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+        DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
+        return userInfoRepository.findByDepartmentInfo(departmentInfo);
     }
 
 }

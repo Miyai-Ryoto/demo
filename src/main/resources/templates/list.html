@@ -17,10 +17,10 @@
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <h2>一覧画面</h2>
-    <div th:if="${postsList.size() == 0}">
+    <div th:if="${postsList == null}">
         登録データが1件もありません。
     </div>
-    <table th:if="${postsList.size() >= 1}">
+    <table th:if="${postsList != null}">
         <thead>
             <tr>
                 <th>id</th>
@@ -29,12 +29,12 @@
                 <th>日付</th>
             </tr>
         </thead>
-        <tbody th:each="postInfo : ${postsList}" th:object=${postInfo}>
-            <tr style="cursor: pointer;" th:onclick="'location.href=\'/list/' + ${postInfo.id} + '\';'">
-                <td th:text="*{id}"></td>
-                <td th:text="*{title}"></td>
-                <td th:text="*{content}"></td>
-                <td th:text="*{eventDate}"></td>
+        <tbody th:each="postsInfo : ${postsList}" th:object=${postsInfo}>
+            <tr style="cursor: pointer;" th:onclick="'location.href=\'/list/' + ${postsInfo.id} + '\';'">
+                <td th:text="${postsInfo.id}"></td>
+                <td th:text="${postsInfo.postInfo.title}"></td>
+                <td th:text="${postsInfo.postInfo.content}"></td>
+                <td th:text="${postsInfo.postInfo.eventDate}"></td>
             </tr>
         </tbody>
     </table>

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.List;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -29,26 +30,24 @@ public class PostService {
 
     private final DepartmentInfoRepository departmentInfoRepository;
 
-
     @Transactional
     public void resistPostInfo(PostForm form, User user) {
-
         PostInfo postInfo = new PostInfo();
-         postInfo.setTitle(form.getTitle());
-         postInfo.setContent(form.getContent());
-         postInfo.setEventDate(form.getEventDate());
+        postInfo.setTitle(form.getTitle());
+        postInfo.setContent(form.getContent());
+        postInfo.setEventDate(form.getEventDate());
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-         postInfo.setUserInfo(userInfo);
+        postInfo.setUserInfo(userInfo);
         PostInfo saveInfo = postInfoRepository.save(postInfo);
 
-
-        for (Long departmentIds : form.getDepartmentId()){
+        List<Long> departmentId = form.getDepartmentId();
+        for (Long departmentIds : departmentId) {
             PostsInfo postsInfo = new PostsInfo();
             DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds).orElse(null);
             postsInfo.setDepartmentInfo(departmentInfo);
             postsInfo.setPostInfo(saveInfo);
             postsInfoRepository.save(postsInfo);
-        }  
+        }
     }
 
 }

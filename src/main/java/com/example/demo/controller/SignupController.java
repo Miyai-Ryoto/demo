@@ -32,7 +32,7 @@ public class SignupController {
 	private final MessageSource messageSource;
 
     /** 部署レポジトリー */
-    private final DepartmentInfoRepository repository;
+    private final DepartmentInfoRepository departmentInfoRepository;
 
 	/**
 	 * 初期表示
@@ -43,7 +43,7 @@ public class SignupController {
 	 */
 	@GetMapping(UrlConst.SIGNUP)
 	public String view(Model model, SignupForm form) {
-        model.addAttribute("departments", repository.findAll());
+        model.addAttribute("departments", departmentInfoRepository.findAll());
     		return "signup";
 	}
 

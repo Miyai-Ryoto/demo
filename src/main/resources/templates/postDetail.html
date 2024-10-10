@@ -17,12 +17,12 @@
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <h1>投稿詳細画面</h1>
-    <div th:if="${postInfo != null}">
-        <h2>id: <span th:text="${postInfo.id}"></span></h2>
-        <p>題名: <span th:text="${postInfo.title}"></span></p>
-        <p>本文: <span th:text="${postInfo.content}"></span></p>
-        <p>日付: <span th:text="${postInfo.eventDate}"></span></p>
-        <form th:action="@{/list/{postInfoId}/responsible(postInfoId=${postInfo.id})}" method="post"
+    <div th:if="${post != null}">
+        <h2>id: <span th:text="${post.id}"></span></h2>
+        <p>題名: <span th:text="${post.postInfo.title}"></span></p>
+        <p>本文: <span th:text="${post.postInfo.content}"></span></p>
+        <p>日付: <span th:text="${post.postInfo.eventDate}"></span></p>
+        <form th:action="@{/list/{postId}/responsible(postId=${post.id})}" method="post"
             th:object="${responsibleForm}">
             <p><label>担当者</label>
                 <select name="userId" required>
@@ -33,11 +33,11 @@
                 <button type="submit">担当者になる</button>
         </form>
     </div>
-    <div th:if="${postInfo == null}">
+    <div th:if="${post == null}">
         <p>登録データーはありません</p>
     </div>
     <h2>回答</h2>
-    <form th:action="@{/list/{postInfoId}/answer(postInfoId=${postInfo.id})}" method="post" th:object="${answerForm}">
+    <form th:action="@{/list/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}">
         <label for="content">本文:</label>
         <input type="text" th:field="*{content}">
         <br><br>

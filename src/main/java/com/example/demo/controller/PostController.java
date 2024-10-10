@@ -21,11 +21,11 @@ public class PostController {
     private final PostService postService;
 
     /** 部署レポジトリー */
-    private final DepartmentInfoRepository repository;
+    private final DepartmentInfoRepository departmentInfoRepository;
 
     @GetMapping(UrlConst.POST)
     public String view(Model model, PostForm form) {
-        model.addAttribute("departments", repository.findAll());
+        model.addAttribute("departments", departmentInfoRepository.findAll());
         return "post";
     }
 

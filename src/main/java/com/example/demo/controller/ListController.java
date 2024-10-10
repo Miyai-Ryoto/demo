@@ -8,15 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.constant.UrlConst;
-import com.example.demo.entity.DepartmentInfo;
-import com.example.demo.entity.PostInfo;
-import com.example.demo.entity.UserInfo;
 import com.example.demo.form.AnswerForm;
-import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
-
 
 @Controller
 @RequiredArgsConstructor
@@ -24,32 +19,23 @@ public class ListController {
 
     private final ListService listService;
 
-    private final UserInfoRepository userInfoRepository;
-
     @GetMapping(UrlConst.LIST)
     public String view(Model model, @AuthenticationPrincipal User user) {
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
-        model.addAttribute("postsList", listService.getPostsByDepartmentId(departmentInfo));
+        model.addAttribute("postsList", listService.getPostListByDepartmentId(user));
         return "list";
     }
 
     @GetMapping(UrlConst.REQUEST)
     public String requestView(Model model, @AuthenticationPrincipal User user) {
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        model.addAttribute("requestsList", listService.getPostaByUserId(userInfo));
+        model.addAttribute("requestsList", listService.getPostListByUserId(user));
         return "request";
     }
 
-    @GetMapping("/list/{id}")
-    public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm answerForm) {
-        PostInfo postInfo = listService.getPostById(id);
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
-        model.addAttribute("postInfo", postInfo);
-        model.addAttribute("userLists", userInfoRepository.findByDepartmentInfo(departmentInfo));
+    @GetMapping(UrlConst.DETAIL)
+    public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
+        model.addAttribute("post", listService.getPostById(id));
+        model.addAttribute("userLists", listService.getUserListByDepartmentId(user));
         return "postDetail";
     }
-    
 
 }
