@@ -17,10 +17,10 @@
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <h2>一覧画面</h2>
-    <div th:if="${postsList == null}">
+    <div th:if="${postsList.size() == 0}">
         登録データが1件もありません。
     </div>
-    <table th:if="${postsList != null}">
+    <table th:if="${postsList.size() >= 1}">
         <thead>
             <tr>
                 <th>id</th>
@@ -35,6 +35,7 @@
                 <td th:text="${postsInfo.postInfo.title}"></td>
                 <td th:text="${postsInfo.postInfo.content}"></td>
                 <td th:text="${postsInfo.postInfo.eventDate}"></td>
+                <td th:text="${postsInfo.userInfo != null ? postsInfo.userInfo.loginId : 'No User'}">Login ID</td>
             </tr>
         </tbody>
     </table>
