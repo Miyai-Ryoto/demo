@@ -27,6 +27,7 @@
                 <th>題名</th>
                 <th>本文</th>
                 <th>日付</th>
+                <th>宛先</th>
             </tr>
         </thead>
         <tbody th:each="postInfo : ${requestsList}" th:object=${postInfo}>
@@ -34,6 +35,12 @@
             <td th:text="*{title}"></td>
             <td th:text="*{content}"></td>
             <td th:text="*{eventDate}"></td>
+            <td>
+                <ul>
+                    <li th:each="post : ${postInfo.postsInfos}" th:text="${post.departmentInfo.departmentName}">Post
+                        DepartmentName</li>
+                </ul>
+            </td>
         </tbody>
     </table>
 
