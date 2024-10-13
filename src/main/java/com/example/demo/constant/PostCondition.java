@@ -17,4 +17,8 @@ public enum PostCondition {
         return condition ? ANSWERED : UNANSWERED;
     }
 
+    public static boolean toBoolean(PostCondition condition) {
+        return condition == ANSWERED;
+    }
+
 }

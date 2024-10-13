@@ -20,7 +20,7 @@ public class PostsSpecifications {
 
     public static Specification<PostsInfo> hasCondition(PostCondition condition) {
         return (root, query, criteriaBuilder) -> condition == null ? null
-                : criteriaBuilder.equal(root.get("condition"), condition);
+                : criteriaBuilder.equal(root.get("condition"), PostCondition.toBoolean(condition));
     }
 
     public static Specification<PostsInfo> hasDepartment(Long departmentId) {

@@ -38,7 +38,7 @@ public class ListController {
     @GetMapping(UrlConst.SEARCH)
     public String searchView(Model model, @AuthenticationPrincipal User user,@ModelAttribute("target") SearchModel target) {
         model.addAttribute("postsList", listService.searchPostList(user, target));
-        return "list/search";
+        return "list";
     }
     
 
