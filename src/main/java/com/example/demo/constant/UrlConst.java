@@ -17,6 +17,12 @@ public class UrlConst {
 	/** 一覧画面 */
 	public static final String LIST = "/list";
 
+	/** 検索画面 */
+	public static final String SEARCH = "/list/search";
+
+	/** 検索結果画面 */
+	public static final String RESULT = "/list/search/resurt";
+
 	/** 詳細画面 */
 	public static final String DETAIL = "/list/{id}";
 

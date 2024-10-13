@@ -17,6 +17,34 @@
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <h2>一覧画面</h2>
+
+    <form th:action="@{/list/search}" method="get" th:object="${target}">
+        <label for="title">題名：</label>
+        <input type="text" th:field="*{title}">
+        <br><br>
+
+        <label for="condition">回答状況：</label>
+        <select th:field="*{condition}">
+            <option th:each="condition : ${conditions}" th:value="${condition}"
+                th:text="${condition.postMessage}" th:selected="${condition == selectedCondition}"></option>
+        </select>
+        <br><br>
+
+        <label for="departmentId">依頼者:</label>
+        <select name="departmentId">
+            <option th:each="department : ${departments}" th:value="${department.id}"
+                th:text="${department.departmentName}" th:selected="${department.id == selectedDepartmentId}"></option>
+        </select>
+        <br><br>
+
+        <label for="eventDate">日付:</label>
+        <input type="text" th:field="*{eventDate}">
+        <br><br>
+
+        <button type="submit">検索</button>
+    </form>
+
+
     <div th:if="${postsList.size() == 0}">
         登録データが1件もありません。
     </div>
@@ -42,6 +70,14 @@
         </tbody>
     </table>
 
+    <script>
+        // Flatpickrを初期化
+        flatpickr("#eventDate", {
+            dateFormat: "Y-m-d", // フォーマットを指定
+            enableTime: false,   // 時間を選択できないようにする
+            local: "ja",
+        });
+    </script>
 </body>
 
 </html>

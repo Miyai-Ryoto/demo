@@ -5,13 +5,18 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.demo.constant.PostCondition;
 import com.example.demo.constant.UrlConst;
 import com.example.demo.form.AnswerForm;
+import com.example.demo.form.SearchModel;
+import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -19,11 +24,23 @@ public class ListController {
 
     private final ListService listService;
 
+    private final DepartmentInfoRepository departmentInfoRepository;
+
     @GetMapping(UrlConst.LIST)
     public String view(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("postsList", listService.getPostListByDepartmentId(user));
+        model.addAttribute("target", new SearchModel());
+        model.addAttribute("departments", departmentInfoRepository.findAll());
+        model.addAttribute("conditions", PostCondition.values());
         return "list";
     }
+
+    @GetMapping(UrlConst.SEARCH)
+    public String searchView(Model model, @AuthenticationPrincipal User user,@ModelAttribute("target") SearchModel target) {
+        model.addAttribute("postsList", listService.searchPostList(user, target));
+        return "list/search";
+    }
+    
 
     @GetMapping(UrlConst.REQUEST)
     public String requestView(Model model, @AuthenticationPrincipal User user) {
