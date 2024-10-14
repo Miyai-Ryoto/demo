@@ -62,7 +62,7 @@ public class ListController {
 
     @GetMapping(UrlConst.DETAIL)
     public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
-        model.addAttribute("post", listService.getPostById(id));
+        model.addAttribute("post", listService.getPostsById(id));
         model.addAttribute("userLists", listService.getUserListByDepartmentId(user));
         return "postDetail";
     }

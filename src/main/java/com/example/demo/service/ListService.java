@@ -53,7 +53,11 @@ public class ListService {
         return postInfoRepository.findByUserInfo(userInfo);
     }
 
-    public PostsInfo getPostById(Long id) {
+    public PostInfo getPostById(Long id) {
+        return postInfoRepository.findById(id).orElse(null);
+    }
+
+    public PostsInfo getPostsById(Long id) {
         return postsInfoRepository.findById(id).orElse(null);
     }
 
