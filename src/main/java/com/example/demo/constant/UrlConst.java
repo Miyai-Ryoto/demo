@@ -29,10 +29,13 @@ public class UrlConst {
 	/** 依頼画面 */
 	public static final String REQUEST = "/request";
 
-	/** 回答画面 */
+	/** 依頼詳細画面 */
+	public static final String REQUESTDETAIL = "/request/{id}";
+
+	/** 回答 */
 	public static final String ANSWER = "/list/{id}/answer";
 
-	/** 担当者設定画面 */
+	/** 担当者設定 */
 	public static final String RESPONSIBLE = "/list/{id}/responsible";
 
 	/** 認証不要画面 */

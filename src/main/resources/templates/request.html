@@ -31,16 +31,18 @@
             </tr>
         </thead>
         <tbody th:each="postInfo : ${requestsList}" th:object=${postInfo}>
-            <td th:text="*{id}"></td>
-            <td th:text="*{title}"></td>
-            <td th:text="*{content}"></td>
-            <td th:text="*{eventDate}"></td>
-            <td>
-                <ul>
-                    <li th:each="post : ${postInfo.postsInfos}" th:text="${post.departmentInfo.departmentName}">Post
-                        DepartmentName</li>
-                </ul>
-            </td>
+            <tr style="cursor: pointer;" th:onclick="'location.href=\'/request/' + ${postInfo.id} + '\';'">
+                <td th:text="*{id}"></td>
+                <td th:text="*{title}"></td>
+                <td th:text="*{content}"></td>
+                <td th:text="*{eventDate}"></td>
+                <td>
+                    <ul>
+                        <li th:each="post : ${postInfo.postsInfos}" th:text="${post.departmentInfo.departmentName}">Post
+                            DepartmentName</li>
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 

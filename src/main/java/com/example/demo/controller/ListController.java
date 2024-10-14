@@ -13,9 +13,11 @@ import com.example.demo.constant.UrlConst;
 import com.example.demo.form.AnswerForm;
 import com.example.demo.form.SearchModel;
 import com.example.demo.repository.DepartmentInfoRepository;
+import com.example.demo.service.AnswerService;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
+
 
 
 @Controller
@@ -23,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class ListController {
 
     private final ListService listService;
+
+    private final AnswerService answerService;
 
     private final DepartmentInfoRepository departmentInfoRepository;
 
@@ -47,6 +51,14 @@ public class ListController {
         model.addAttribute("requestsList", listService.getPostListByUserId(user));
         return "request";
     }
+
+    @GetMapping(UrlConst.REQUESTDETAIL)
+    public String requestDetail(Model model, @PathVariable Long id) {
+        model.addAttribute("request", listService.getPostById(id));
+        model.addAttribute("answerList", answerService.getAnswerListByPostId(id));
+        return "requestDetail";
+    }
+    
 
     @GetMapping(UrlConst.DETAIL)
     public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
