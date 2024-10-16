@@ -16,54 +16,56 @@
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-white">
     <div th:replace="~{'common/header' :: header}"></div>
-    <form class="w-full" th:action="@{/post}" method="post" th:object="${postForm}">
-        <div class="flex flex-wrap mx-6 mb-6">
-            <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
-                    for="title">題名</label>
-                <input
-                    class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                    type="text" th:field="*{title}">
-            </div>
-        </div>
-
-        <div class="flex flex-wrap mx-6 mb-6">
-            <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
-                    for="content">本文</label>
-                <textarea
-                    class="shadow appearance-none block w-full h-52 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                    th:field="*{content}"></textarea>
-            </div>
-        </div>
-
-        <div class="flex flex-wrap mx-6 mb-2">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2">宛先</label>
-                <div class="relative">
-                    <select
+    <div class="px-5 py-5">
+        <form class="w-full px-5 py-5 bg-sky-100 border-8 border-sky-600 border-double rounded-md" th:action="@{/post}" method="post" th:object="${postForm}">
+            <div class="flex flex-wrap mb-6">
+                <div class="w-full px-3">
+                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
+                        for="title">題名</label>
+                    <input
                         class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                        multiple name="departmentId" required>
-                        <option th:each="department : ${departments}" th:value="${department.id}"
-                            th:text="${department.departmentName}"
-                            th:selected="${department.id == selectedDepartmentId}">
-                        </option>
-                    </select>
+                        type="text" th:field="*{title}">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
-                    for="eventDate">日付</label>
-                <input
-                    class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                    type="text" th:field="*{eventDate}">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    type="submit">送信</button>
+
+            <div class="flex flex-wrap mb-6">
+                <div class="w-full px-3">
+                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
+                        for="content">本文</label>
+                    <textarea
+                        class="shadow appearance-none block w-full h-80 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                        th:field="*{content}"></textarea>
+                </div>
             </div>
-        </div>
-    </form>
+
+            <div class="flex flex-wrap mb-2">
+                <div class="w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2">宛先</label>
+                    <div class="relative">
+                        <select
+                            class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                            multiple name="departmentId" required>
+                            <option th:each="department : ${departments}" th:value="${department.id}"
+                                th:text="${department.departmentName}"
+                                th:selected="${department.id == selectedDepartmentId}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
+                        for="eventDate">日付</label>
+                    <input
+                        class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                        type="text" th:field="*{eventDate}">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        type="submit">送信</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <script>
         // Flatpickrを初期化
