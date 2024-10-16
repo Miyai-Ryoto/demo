@@ -16,34 +16,42 @@
 
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
-    <h1>投稿詳細画面</h1>
-    <div th:if="${post != null}">
-        <h2>id: <span th:text="${post.id}"></span></h2>
-        <p>題名: <span th:text="${post.postInfo.title}"></span></p>
-        <p>本文: <span th:text="${post.postInfo.content}"></span></p>
-        <p>日付: <span th:text="${post.postInfo.eventDate}"></span></p>
-        <form th:action="@{/list/{postId}/responsible(postId=${post.id})}" method="post"
-            th:object="${responsibleForm}">
+    <div class="grid grid-cols-5 grid-rows-10 gap-4 px-5 pb-5 pt-8">
+        <form th:action="@{/list/{postId}/responsible(postId=${post.id})}" method="post" th:object="${responsibleForm}" class="col-start-1 col-span-1 row-span-1">
             <p><label>担当者</label>
                 <select name="userId" required>
-                    <option th:each="userList : ${userLists}" th:value="${userList.id}"
-                        th:text="${userList.loginId}" th:selected="${userList.id == selectedUserListId}">
+                    <option th:each="userList : ${userLists}" th:value="${userList.id}" th:text="${userList.loginId}"
+                        th:selected="${userList.id == selectedUserListId}">
                     </option>
                 </select>
                 <button type="submit">担当者になる</button>
         </form>
+        <div th:if="${post == null}" class="col-start-1 col-span-1 row-start-2 row-span-4">
+            <p>登録データーはありません</p>
+        </div>
+        <table th:if="${post != null}" class="border-separate border border-slate-400 col-start-1 col-span-5 row-start-2 row-span-4">
+            <tr>
+                <th class="border border-slate-400">題名</th>
+                <td class="border border-slate-400" th:text="${post.postInfo.title}"></td>
+            </tr>
+            <tr>
+                <th class="border border-slate-400">本文</th>
+                <td class="border border-slate-400" th:text="${post.postInfo.content}"></td>
+            </tr>
+            <tr>
+                <th class="border border-slate-400">日付</th>
+                <td class="border border-slate-400" th:text="${post.postInfo.eventDate}"></td>
+            </tr>
+        </table>
+        <h1 class="col-span-1 row-start-6 row-span-1">回答</h1>
+        <form th:action="@{/list/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}" class="col-start-1 col-span-5 row-start-7 row-span-3">
+            <label for="content">本文</label>
+            <input type="text" th:field="*{content}">
+            <br><br>
+            <button type="submit">回答する</button>
+        </form>
+        <a th:href="@{/list}" class="col-end-6 col-span-1 row-start-10 row-span-1">▶投稿一覧画面へ戻る</a>
     </div>
-    <div th:if="${post == null}">
-        <p>登録データーはありません</p>
-    </div>
-    <h2>回答</h2>
-    <form th:action="@{/list/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}">
-        <label for="content">本文:</label>
-        <input type="text" th:field="*{content}">
-        <br><br>
-        <button type="submit">回答</button>
-    </form>
-    <a th:href="@{/list}">▶投稿一覧画面へ戻る</a>
 </body>
 
 </html>
