@@ -16,35 +16,25 @@
 
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
-    <h2>依頼画面</h2>
-    <div th:if="${requestsList.size() == 0}">
-        登録データが1件もありません。
+    <div class="grid grid-cols-5 grid-rows-2 gap-4 px-5 pb-5 pt-8">
+        <div class="col-span-1 row-span-1 px-3 py-2 rounded border border-sky-400 bg-sky-100 shadow-lg"></div>
+        <div th:if="${requestsList.size() == 0}" class="col-span-4 row-span-1">
+            登録データが1件もありません。
+        </div>
+        <div class="grid grid-cols-1 grid-rows-10 col-span-4 row-span-2">
+            <table th:if="${requestsList.size() >= 1}" class="grid grid-cols-1 grid-rows-10 row-span-10 col-span-1">
+                <tbody th:each="postInfo : ${requestsList}" th:object=${postInfo}
+                    class="grid grid-cols-1 grid-rows-1 col-span-1 row-span-1">
+                    <tr style="cursor: pointer;" th:onclick="'location.href=\'/request/' + ${postInfo.id} + '\';'"
+                        class="border border-gray-500 col-span-1 row-span-1 grid grid-rows-1 grid-cols-4 bg-sky-50">
+                        <td th:text="*{title}" class="flex items-center justify-start text-left col-span-3 row-span-1">
+                        </td>
+                        <td th:text="*{eventDate}" class="flex items-center justify-center col-span-1 row-span-1"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table th:if="${requestsList.size() >= 1}">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>題名</th>
-                <th>本文</th>
-                <th>日付</th>
-                <th>宛先</th>
-            </tr>
-        </thead>
-        <tbody th:each="postInfo : ${requestsList}" th:object=${postInfo}>
-            <tr style="cursor: pointer;" th:onclick="'location.href=\'/request/' + ${postInfo.id} + '\';'">
-                <td th:text="*{id}"></td>
-                <td th:text="*{title}"></td>
-                <td th:text="*{content}"></td>
-                <td th:text="*{eventDate}"></td>
-                <td>
-                    <ul>
-                        <li th:each="post : ${postInfo.postsInfos}" th:text="${post.departmentInfo.departmentName}">Post
-                            DepartmentName</li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
 </body>
 

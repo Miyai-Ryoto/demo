@@ -16,15 +16,17 @@
 
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
-    <h1>投稿詳細画面</h1>
+    <div th:if="${request == null}">
+        <p>登録データはありません</p>
+    </div>
     <div th:if="${request != null}">
-        <h2>id: <span th:text="${request.id}"></span></h2>
+        <ul>
+            <li th:each="post : ${request.postsInfos}" th:text="${post.departmentInfo.departmentName}">Post
+                DepartmentName</li>
+        </ul>
         <p>題名: <span th:text="${request.title}"></span></p>
         <p>本文: <span th:text="${request.content}"></span></p>
         <p>日付: <span th:text="${request.eventDate}"></span></p>
-    </div>
-    <div th:if="${request == null}">
-        <p>登録データはありません</p>
     </div>
     <div th:if="${answerList.size() == 0}">
         回答データが1件もありません。
@@ -32,15 +34,13 @@
     <table th:if="${answerList.size() >= 1}">
         <thead>
             <tr>
-                <th>id</th>
-                <th>本文</th>
                 <th>回答者</th>
+                <th>本文</th>
             </tr>
         </thead>
         <tbody th:each="answer : ${answerList}" th:object=${answer}>
-            <td th:text="*{id}"></td>
-            <td th:text="*{content}"></td>
             <td th:text="${answer.userInfo.loginId}"></td>
+            <td th:text="*{content}"></td>
         </tbody>
     </table>
     <a th:href="@{/request}">▶依頼一覧画面へ戻る</a>
