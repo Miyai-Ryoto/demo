@@ -19,51 +19,38 @@
 <body class="bg-white">
     <div th:replace="~{'common/header' :: header}"></div>
     <div class="p-5">
-        <form class="w-full p-5 bg-sky-100 border-8 border-sky-600 border-double rounded-md" th:action="@{/post}" method="post" th:object="${postForm}">
-            <div class="flex flex-wrap mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
-                        for="title">題名</label>
-                    <input
-                        class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                        type="text" th:field="*{title}">
-                </div>
-            </div>
-
-            <div class="flex flex-wrap mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
-                        for="content">本文</label>
-                    <textarea
-                        class="shadow appearance-none block w-full h-80 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                        th:field="*{content}"></textarea>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap mb-2">
-                <div class="w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2">宛先</label>
-                    <div class="relative">
-                        <select
-                            class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                            multiple name="departmentId" required>
-                            <option th:each="department : ${departments}" th:value="${department.id}"
-                                th:text="${department.departmentName}"
-                                th:selected="${department.id == selectedDepartmentId}">
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-gray-500 text-2xl font-bold mb-2"
-                        for="eventDate">日付</label>
-                    <input
-                        class="shadow appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                        type="text" th:field="*{eventDate}">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        type="submit">送信</button>
-                </div>
-            </div>
+        <form
+            class="px-5 grid grid-cols-10 grid-rows-10 gap-x-5 bg-sky-100 border-8 border-sky-600 border-double rounded-md"
+            th:action="@{/post}" method="post" th:object="${postForm}">
+            <label
+                class="tracking-wide text-gray-500 text-2xl font-bold row-span-1 col-span-1 flex items-center justify-start"
+                for="title">題名</label>
+            <input
+                class="shadow text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-1 col-span-10"
+                type="text" th:field="*{title}">
+            <label
+                class="tracking-wide text-gray-500 text-2xl font-bold row-span-1 col-span-1 flex items-center justify-start"
+                for="content">本文</label>
+            <textarea
+                class="shadow  h-80 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-4 col-span-10 row-start-4 col-start-1"
+                th:field="*{content}"></textarea>
+            <label
+                class="tracking-wide text-gray-500 text-2xl font-bold row-start-8 col-start-1 row-span-1 col-span-1 flex items-center justify-start">宛先</label>
+            <select
+                class="shadow text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-start-9 col-start-1 row-span-2 col-span-2 mb-3"
+                multiple name="departmentId" required>
+                <option th:each="department : ${departments}" th:value="${department.id}"
+                    th:text="${department.departmentName}" th:selected="${department.id == selectedDepartmentId}">
+                </option>
+            </select>
+            <label
+                class="tracking-wide text-gray-500 text-2xl font-bold col-start-3 row-start-8 row-span-1 col-span-1 flex items-center justify-start"
+                for="eventDate">回答期日</label>
+            <input
+                class="shadow text-gray-700 border border-gray-200 rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-3 row-start-9 col-span-2 row-span-1"
+                type="text" th:field="*{eventDate}">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded col-end-11 row-end-11 row-span-1 col-span-1 mb-3"
+                type="submit">送信</button>
         </form>
     </div>
 

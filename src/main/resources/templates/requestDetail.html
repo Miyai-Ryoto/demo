@@ -16,45 +16,61 @@
 
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
-    <div class="grid grid-cols-5 grid-rows-6 gap-6 px-5 pb-5 pt-8">
+    <div class="grid grid-cols-5 grid-rows-8 gap-6 px-5 pb-5 pt-8">
+        <h1
+            class="flex items-center justify-start col-span-1 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-700 text-white text-2xl font-bold">
+            依頼文</h1>
         <div th:if="${request == null}" class="col-span-5 row-span-3">
             <p>登録データはありません</p>
         </div>
-        <div th:if="${request != null}" class="col-span-5 row-span-3 grid grid-col-6 grid-row-5">
-            <ul class="row-span-1 col-span-6 flex flex-wrap space-x-4">
+        <div th:if="${request != null}" class="col-span-5 row-span-3 grid grid-col-6 grid-row-5 gap-4">
+            <ul
+                class="row-span-1 col-span-6 flex flex-wrap space-x-4 border border-dashed border-gray-400 bg-slate-100 rounded">
                 <li th:each="post : ${request.postsInfos}" th:text="${post.departmentInfo.departmentName}"
-                    class="bg-blue-200 p-2 rounded"></li>
+                    class="p-2 text-slate-500 text-sm font-semibold tracking-wide flex items-center justify-center"></li>
             </ul>
-            <table class="row-span-4 col-span-6 grid grid-rows-4 grid-cols-6 border border-slate-400">
+            <table class="row-span-4 col-span-6 grid grid-rows-4 grid-cols-6 border-slate-100 border">
                 <tbody class="row-span-4 col-span-6 grid grid-rows-4 grid-cols-6">
                     <tr class="row-span-1 col-span-6 grid grid-rows-1 grid-cols-6">
-                        <th class="row-span-1 col-span-1 border border-slate-400 bg-sky-700 text-white text-2xl font-bold flex items-center justify-center">題名</th>
-                        <td th:text="${request.title}" class="row-span-1 col-span-3 border border-slate-400 flex items-center justify-start"></td>
-                        <th class="row-span-1 col-span-1 border border-slate-400 bg-sky-700 text-white text-2xl font-bold flex items-center justify-center">日付</th>
-                        <td th:text="${request.eventDate}" class="row-span-1 col-span-1 border border-slate-400 flex items-center justify-center"></td>
+                        <th
+                            class="row-span-1 col-span-1 bg-slate-400 text-white border-slate-100 border text-xl font-bold flex items-center justify-center">
+                            題名</th>
+                        <td th:text="${request.title}"
+                            class="border-slate-100 border row-span-1 col-span-3 flex items-center justify-start pl-4"></td>
+                        <th
+                            class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
+                            日付</th>
+                        <td th:text="${request.eventDate}"
+                            class="border-slate-100 border row-span-1 col-span-1 flex items-center justify-center"></td>
                     </tr>
                     <tr class="row-span-3 col-span-6 grid grid-rows-1 grid-cols-6">
-                        <th class="row-span-1 col-span-1 border border-slate-400 bg-sky-700 text-white text-2xl font-bold flex items-center justify-center">本文</th>
-                        <td th:text="${request.content}" class="row-span-1 col-span-5 border border-slate-400"></td>
+                        <th
+                            class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
+                            本文</th>
+                        <td th:text="${request.content}" class="border-slate-100 border row-span-1 col-span-5 pl-4"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <h1
+            class="flex items-center justify-start col-span-5 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
+            回答一覧</h1>
         <div th:if="${answerList.size() == 0}" class="col-span-5 row-span-2">
             回答データが1件もありません。
         </div>
-        <div class="col-span-5 row-span-2 overflow-y-scroll h-40 border border-gray-300">
-            <table th:if="${answerList.size() >= 1}">
+        <div th:if="${answerList.size() >= 1}"
+            class="col-span-5 row-span-2 overflow-y-scroll h-40 border border-gray-500">
+            <table class="w-full h-5">
                 <tbody th:each="answer : ${answerList}" th:object=${answer}>
-                    <tr class="border border-gray-500 bg-sky-50">
-                        <td th:text="${answer.userInfo.loginId}"></td>
-                        <td th:text="*{content}"></td>
+                    <tr class="border border-slate-400 bg-slate-100">
+                        <td th:text="${answer.userInfo.loginId}" class="w-1/5 pl-4"></td>
+                        <td th:text="*{content}" class="w-4/5"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <a th:href="@{/request}"
-            class="col-end-6 col-span-1 row-span-1 text-base text-gray-400 font-medium flex justify-end items-start">▶依頼一覧画面へ戻る</a>
+            class="col-end-6 col-span-1 row-span-1 text-base text-gray-400 hover:text-gray-500 font-medium flex justify-end items-start">▶依頼一覧画面へ戻る</a>
     </div>
 </body>
 

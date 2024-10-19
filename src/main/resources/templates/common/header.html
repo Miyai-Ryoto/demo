@@ -3,7 +3,7 @@
 
 <body>
     <header>
-        <div class="flex items-center justify-between bg-gradient-to-r from-sky-600 via-sky-400 to-sky-200 p-6">
+        <div class="flex items-center justify-between bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 p-6 border-b-8 border-blue-700">
             <h1 class="text-white text-5xl font-bold">依頼・照会ポータルサイト</h1>
             <div class="flex">
                 <form th:action="@{/logout}" method="post">
@@ -28,8 +28,8 @@
                     </svg>
                 </button>
             </div>
-            <a th:href="@{/menu}" class="flex flex-col items-center shadow-lg rounded-md bg-sky-100">
-                <svg class="h-32 w-32 text-gray-700" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+            <a th:href="@{/menu}" class="flex flex-col items-center">
+                <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <polyline points="5 12 3 12 12 3 21 12 19 12" />
@@ -38,8 +38,8 @@
                 </svg>
                 <span class="text-2xl font-semibold text-gray-700">MENU</span>
             </a>
-            <a th:href="@{/list}" class="flex flex-col items-center shadow-lg rounded-md bg-sky-100">
-                <svg class="h-32 w-32 text-gray-700" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+            <a th:href="@{/list}" class="flex flex-col items-center">
+                <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -47,16 +47,16 @@
                 </svg>
                 <span class="text-2xl font-semibold text-gray-700">LIST</span>
             </a>
-            <a th:href="@{/request}" class="flex flex-col items-center shadow-lg rounded-md bg-sky-100">
-                <svg class="h-32 w-32 text-gray-700" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+            <a th:href="@{/request}" class="flex flex-col items-center">
+                <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
                     <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
                 </svg>
                 <span class="text-2xl font-semibold text-gray-700">REQUEST</span>
             </a>
-            <a th:href="@{/post}" class="flex flex-col items-center shadow-lg rounded-md bg-sky-100">
-                <svg class="h-32 w-32 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a th:href="@{/post}" class="flex flex-col items-center">
+                <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>

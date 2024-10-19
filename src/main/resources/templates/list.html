@@ -20,23 +20,23 @@
     <div th:replace="~{'common/header' :: header}"></div>
     <div class="grid grid-cols-5 grid-rows-2 gap-4 px-5 pb-5 pt-8">
         <form th:action="@{/list/search}" method="get" th:object="${target}"
-            class="grid grid-cols-3 gap-x-4 gap-y-6 col-span-1 row-span-1 px-3 py-2 rounded border border-sky-400 bg-sky-100 shadow-lg">
-            <input type="text" th:field="*{title}" class="col-span-3 rounded-lg border-2 border-gray-500">
-            <label for="condition" class="col-span-1 text-gray-500 font-bold text-lg">回答状況</label>
-            <select th:field="*{condition}" class="col-span-2 rounded-lg border-2 border-gray-500">
+            class="grid grid-cols-3 gap-x-4 gap-y-6 col-span-1 row-span-1 px-3 py-2 rounded bg-blue-400 shadow-xl shadow-blue-400/50">
+            <input type="text" th:field="*{title}" class="col-span-3 rounded-lg border border-gray-200 p-2">
+            <label for="condition" class="col-span-1 text-white font-bold text-lg">回答状況</label>
+            <select th:field="*{condition}" class="col-span-2 rounded-lg border border-gray-200">
                 <option th:each="condition : ${conditions}" th:value="${condition}" th:text="${condition.postMessage}"
                     th:selected="${condition == selectedCondition}"></option>
             </select>
-            <label for="departmentId" class="col-span-1 text-gray-500 font-bold text-lg">依頼者</label>
-            <select name="departmentId" class="col-span-2 rounded-lg border-2 border-gray-500">
+            <label for="departmentId" class="col-span-1 text-white font-bold text-lg">依頼者</label>
+            <select name="departmentId" class="col-span-2 rounded-lg border border-gray-200">
                 <option th:each="department : ${departments}" th:value="${department.id}"
                     th:text="${department.departmentName}" th:selected="${department.id == selectedDepartmentId}">
                 </option>
             </select>
-            <label for="eventDate" class="col-span-1 text-gray-500 font-bold text-lg">日付</label>
-            <input type="text" th:field="*{eventDate}" class="col-span-2 rounded-lg border-2 border-gray-500">
+            <label for="eventDate" class="col-span-1 text-white font-bold text-lg">日付</label>
+            <input type="text" th:field="*{eventDate}" class="col-span-2 rounded-lg border border-gray-200">
             <button type="submit"
-                class="col-start-3 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">検索</button>
+                class="col-start-3 bg-slate-400 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded">検索</button>
         </form>
 
 
@@ -47,7 +47,7 @@
             <table th:if="${postsList.size() >= 1}" class="grid grid-cols-1 grid-rows-10 row-span-10 col-span-1">
                 <tbody th:each="postsInfo : ${postsList}" th:object=${postsInfo}
                     class="grid grid-cols-1 grid-rows-1 col-span-1 row-span-1">
-                    <tr class="border border-gray-500 col-span-1 row-span-1 grid grid-rows-1 grid-cols-7 bg-sky-50"
+                    <tr class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-7 bg-sky-100 hover:bg-sky-200"
                         style="cursor: pointer;" th:onclick="'location.href=\'/list/' + ${postsInfo.id} + '\';'">
                         <td th:text="${postsInfo.status.postMessage}"
                             class="flex items-center justify-center col-span-1 row-span-1"></td>
@@ -55,7 +55,7 @@
                             class="flex items-center justify-start text-left col-span-4 row-span-1"></td>
                         <td th:text="${postsInfo.postInfo.eventDate}"
                             class="flex items-center justify-center col-span-1 row-span-1"></td>
-                        <td th:text="${postsInfo.userInfo != null ? postsInfo.userInfo.loginId : 'No User'}"
+                        <td th:text="${postsInfo.userInfo != null ? postsInfo.userInfo.loginId : '担当者なし'}"
                             class="flex items-center justify-center col-span-1 row-span-1"></td>
                     </tr>
                 </tbody>
