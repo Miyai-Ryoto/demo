@@ -20,14 +20,14 @@ public class UrlConst {
 	/** 検索画面 */
 	public static final String SEARCH = "/list/search";
 
-	/** 検索結果画面 */
-	public static final String RESULT = "/list/search/resurt";
-
 	/** 詳細画面 */
 	public static final String DETAIL = "/list/{id}";
 
 	/** 依頼画面 */
 	public static final String REQUEST = "/request";
+
+	/** 検索画面 */
+	public static final String REQUESTSEARCH = "/request/search";
 
 	/** 依頼詳細画面 */
 	public static final String REQUESTDETAIL = "/request/{id}";

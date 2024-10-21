@@ -12,10 +12,12 @@ import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.PostInfo;
 import com.example.demo.entity.PostsInfo;
 import com.example.demo.entity.UserInfo;
+import com.example.demo.form.FindModel;
 import com.example.demo.form.SearchModel;
 import com.example.demo.repository.PostInfoRepository;
 import com.example.demo.repository.PostsInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.specification.PostSpecifications;
 import com.example.demo.specification.PostsSpecifications;
 
 import lombok.RequiredArgsConstructor;
@@ -50,9 +52,20 @@ public class ListService {
         return postsInfoRepository.findAll(spec, pageable);
     }
 
-    public List<PostInfo> getPostListByUserId(User user) {
+    public Page<PostInfo> getPostListByUserId(User user, Pageable pageable) {
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        return postInfoRepository.findByUserInfo(userInfo);
+        return postInfoRepository.findByUserInfo(userInfo, pageable);
+    }
+
+    public Page<PostInfo> searchRequestList(User user, FindModel target, Pageable pageable){
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+        Long belongsUserId = userInfo.getId();
+        Specification<PostInfo> spec = Specification
+        .where(PostSpecifications.belongsToUser(belongsUserId))
+        .and(PostSpecifications.hasTitle(target.getTitle()))
+        .and(PostSpecifications.startDateGreaterThanEqual(target.getEventDate()));
+
+        return postInfoRepository.findAll(spec, pageable);
     }
 
     public PostInfo getPostById(Long id) {

@@ -1,20 +1,18 @@
 package com.example.demo.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.PostInfo;
 import com.example.demo.entity.UserInfo;
 
-import java.util.List;
-import com.example.demo.entity.PostsInfo;
-
 
 @Repository
-public interface PostInfoRepository extends JpaRepository<PostInfo, Long> {
+public interface PostInfoRepository extends JpaRepository<PostInfo, Long>, JpaSpecificationExecutor<PostInfo> {
 
-    List<PostInfo> findByUserInfo(UserInfo userInfo);
-
-    List<PostInfo> findByPostsInfos(PostsInfo postsInfo);
+    Page<PostInfo> findByUserInfo(UserInfo userInfo, Pageable pageable);
 
 }

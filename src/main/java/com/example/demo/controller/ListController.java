@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.demo.constant.PostCondition;
 import com.example.demo.constant.UrlConst;
 import com.example.demo.form.AnswerForm;
+import com.example.demo.form.FindModel;
 import com.example.demo.form.SearchModel;
 import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
-
-
 
 @Controller
 @RequiredArgsConstructor
@@ -33,7 +32,8 @@ public class ListController {
     private final DepartmentInfoRepository departmentInfoRepository;
 
     @GetMapping(UrlConst.LIST)
-    public String view(Model model, @AuthenticationPrincipal User user,@PageableDefault(page = 0, size = 10) Pageable pageable) {
+    public String view(Model model, @AuthenticationPrincipal User user,
+            @PageableDefault(page = 0, size = 10) Pageable pageable) {
         model.addAttribute("postsList", listService.getPostListByDepartmnetId(user, pageable));
         model.addAttribute("target", new SearchModel());
         model.addAttribute("departments", departmentInfoRepository.findAll());
@@ -42,17 +42,27 @@ public class ListController {
     }
 
     @GetMapping(UrlConst.SEARCH)
-    public String searchView(Model model, @AuthenticationPrincipal User user,@ModelAttribute("target") SearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+    public String searchView(Model model, @AuthenticationPrincipal User user,
+            @ModelAttribute("target") SearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
         model.addAttribute("postsList", listService.searchPostList(user, target, pageable));
         return "list";
     }
-    
 
     @GetMapping(UrlConst.REQUEST)
-    public String requestView(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("requestsList", listService.getPostListByUserId(user));
+    public String requestView(Model model, @AuthenticationPrincipal User user,
+            @PageableDefault(page = 0, size = 10) Pageable pageable) {
+        model.addAttribute("requestsList", listService.getPostListByUserId(user, pageable));
+        model.addAttribute("target", new FindModel());
         return "request";
     }
+
+    @GetMapping(UrlConst.REQUESTSEARCH)
+    public String requestsearchView(Model model, @AuthenticationPrincipal User user,
+            @ModelAttribute("target") FindModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+        model.addAttribute("requestsList", listService.searchRequestList(user, target, pageable));
+        return "request";
+    }
+
 
     @GetMapping(UrlConst.REQUESTDETAIL)
     public String requestDetail(Model model, @PathVariable Long id) {
@@ -60,7 +70,6 @@ public class ListController {
         model.addAttribute("answerList", answerService.getAnswerListByPostId(id));
         return "requestDetail";
     }
-    
 
     @GetMapping(UrlConst.DETAIL)
     public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
