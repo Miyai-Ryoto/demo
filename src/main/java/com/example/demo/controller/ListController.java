@@ -42,8 +42,8 @@ public class ListController {
     }
 
     @GetMapping(UrlConst.SEARCH)
-    public String searchView(Model model, @AuthenticationPrincipal User user,@ModelAttribute("target") SearchModel target) {
-        model.addAttribute("postsList", listService.searchPostList(user, target));
+    public String searchView(Model model, @AuthenticationPrincipal User user,@ModelAttribute("target") SearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+        model.addAttribute("postsList", listService.searchPostList(user, target, pageable));
         return "list";
     }
     

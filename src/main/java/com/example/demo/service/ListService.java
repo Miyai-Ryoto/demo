@@ -36,7 +36,7 @@ public class ListService {
         return postsInfoRepository.findByDepartmentInfo(departmentInfo, pageable);
     }
 
-    public List<PostsInfo> searchPostList(User user, SearchModel target) {
+    public Page<PostsInfo> searchPostList(User user, SearchModel target, Pageable pageable) {
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
         Long belongsDepartmentId = departmentInfo.getId();
@@ -47,7 +47,7 @@ public class ListService {
                 .and(PostsSpecifications.hasDepartment(target.getDepartmentId()))
                 .and(PostsSpecifications.startDateGreaterThanEqual(target.getEventDate()));
 
-        return postsInfoRepository.findAll(spec);
+        return postsInfoRepository.findAll(spec, pageable);
     }
 
     public List<PostInfo> getPostListByUserId(User user) {
