@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -31,8 +33,8 @@ public class ListController {
     private final DepartmentInfoRepository departmentInfoRepository;
 
     @GetMapping(UrlConst.LIST)
-    public String view(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("postsList", listService.getPostListByDepartmentId(user));
+    public String view(Model model, @AuthenticationPrincipal User user,@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        model.addAttribute("postsList", listService.getPostListByDepartmnetId(user, pageable));
         model.addAttribute("target", new SearchModel());
         model.addAttribute("departments", departmentInfoRepository.findAll());
         model.addAttribute("conditions", PostCondition.values());

@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -28,10 +30,10 @@ public class ListService {
 
     private final UserInfoRepository userInfoRepository;
 
-    public List<PostsInfo> getPostListByDepartmentId(User user) {
+    public Page<PostsInfo> getPostListByDepartmnetId(User user, Pageable pageable){
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
-        return postsInfoRepository.findByDepartmentInfo(departmentInfo);
+        return postsInfoRepository.findByDepartmentInfo(departmentInfo, pageable);
     }
 
     public List<PostsInfo> searchPostList(User user, SearchModel target) {
