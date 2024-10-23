@@ -47,13 +47,15 @@
             <table class="grid grid-cols-1 grid-rows-10 row-span-10 col-span-1">
                 <tbody th:each="postsInfo : ${postsList.content}" th:object=${postsInfo}
                     class="grid grid-cols-1 grid-rows-1 col-span-1 row-span-1">
-                    <tr class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-7 bg-sky-100 hover:bg-sky-200"
+                    <tr class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-8 bg-sky-100 hover:bg-sky-200"
                         style="cursor: pointer;" th:onclick="'location.href=\'/list/' + ${postsInfo.id} + '\';'">
                         <td th:text="${postsInfo.status.postMessage}"
                             class="flex items-center justify-center col-span-1 row-span-1"></td>
                         <td th:text="${postsInfo.postInfo.title}"
                             class="flex items-center justify-start text-left col-span-4 row-span-1"></td>
                         <td th:text="${postsInfo.postInfo.eventDate}"
+                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                        <td th:text="${postsInfo.postInfo.userInfo.departmentInfo.departmentName}"
                             class="flex items-center justify-center col-span-1 row-span-1"></td>
                         <td th:text="${postsInfo.userInfo != null ? postsInfo.userInfo.loginId : '担当者なし'}"
                             class="flex items-center justify-center col-span-1 row-span-1"></td>
