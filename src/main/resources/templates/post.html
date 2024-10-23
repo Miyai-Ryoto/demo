@@ -6,6 +6,7 @@
     <title>フォーム画面</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="/js/charCount.js"></script>
     <link href="/output.css" rel="stylesheet">
     <style>
         .custom-input {
@@ -19,7 +20,7 @@
 <body class="bg-white">
     <div th:replace="~{'common/header' :: header}"></div>
     <div th:if="${message != null}" role="alert" class="pt-5 px-5">
-        <div th:text="${message}" class="flex items-center bg-red-600 text-white text-lg font-bold py-3 pl-3" ></div>
+        <div th:text="${message}" class="flex items-center bg-red-600 text-white text-lg font-bold py-3 pl-3"></div>
     </div>
     <div class="p-5">
         <form
@@ -34,9 +35,13 @@
             <label
                 class="tracking-wide text-gray-500 text-2xl font-bold row-span-1 col-span-1 flex items-center justify-start"
                 for="content">本文</label>
-            <textarea
-                class="shadow  h-80 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-4 col-span-10 row-start-4 col-start-1"
-                th:field="*{content}"></textarea>
+            <div class="row-span-4 col-span-10 row-start-4 col-start-1 grid grid-cols-10 grid-rows-11">
+                <textarea maxlength="1000" oninput="updateCount('content', 'charCount')" rows="20" cols="50"
+                    class="shadow  h-80 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-10 col-span-10"
+                    id="content" th:field="*{content}"></textarea>
+                <div id="charCount"
+                    class="flex justify-end items-start row-start-11 col-end-11 row-span-1 col-span-1 text-lg font-bold text-gray-500">0 / 1000</div>
+            </div>
             <label
                 class="tracking-wide text-gray-500 text-2xl font-bold row-start-8 col-start-1 row-span-1 col-span-1 flex items-center justify-start">宛先</label>
             <select

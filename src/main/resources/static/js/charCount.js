@@ -6,5 +6,5 @@ function updateCount(textAreaId, countDisplayId) {
 }
 
 window.onload = function() {
-    updateCount("userComment", "charCount"); // ページロード時に初期値を設定
+    updateCount("content", "charCount"); // ページロード時に初期値を設定
 };
