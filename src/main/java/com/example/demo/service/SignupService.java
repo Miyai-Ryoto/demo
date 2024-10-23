@@ -25,7 +25,6 @@ public class SignupService {
 
 
     public Optional<UserInfo> resistUserInfo(SignupForm form) {
-        DepartmentInfo departmentInfo = departmentInfoRepository.findById(form.getDepartmentId()).orElse(null);
         var userInfoExisteOpt = repository.findByLoginId(form.getLoginId());
         if (userInfoExisteOpt.isPresent()){
             return Optional.empty();
@@ -33,6 +32,7 @@ public class SignupService {
 
         UserInfo userInfo = new UserInfo();
         userInfo.setLoginId(form.getLoginId());
+        DepartmentInfo departmentInfo = departmentInfoRepository.findById(form.getDepartmentId()).orElse(null);
         userInfo.setDepartmentInfo(departmentInfo);
         var encodedPassword = passwordEncoder.encode(form.getPassword());
         userInfo.setPassword(encodedPassword);
