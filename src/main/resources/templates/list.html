@@ -60,10 +60,10 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="flex items-center justify-center col-span-1 row-span-1 row-end-12">
-                <a th:if="${postsList.hasPrevious()}" th:href="@{/posts(page=${postsList.number - 1})}"
+            <div class="flex items-center justify-center col-span-1 row-span-1 row-end-12 p-3">
+                <a th:if="${postsList.hasPrevious()}" th:href="@{/list(page=${postsList.number - 1})}"
                     class="px-4 py-2 bg-blue-500 text-white rounded">前へ</a>
-                <a th:if="${postsList.hasNext()}" th:href="@{/posts(page=${postsList.number + 1})}"
+                <a th:if="${postsList.hasNext()}" th:href="@{/list(page=${postsList.number + 1})}"
                     class="px-4 py-2 bg-blue-500 text-white rounded">次へ</a>
             </div>
         </div>
