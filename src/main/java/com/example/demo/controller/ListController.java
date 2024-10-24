@@ -92,10 +92,20 @@ public class ListController {
         if (postInfo != null && postInfo.getFileData() != null) {
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + postInfo.getFileName() + "\"")
-                    .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) 
+                    .contentType(getContentType(postInfo.getFileName())) 
                     .body(postInfo.getFileData());
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    private MediaType getContentType(String fileName) {
+        if (fileName.endsWith(".docx")) {
+            return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        } else if (fileName.endsWith(".xlsx")) {
+            return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        } else {
+            return MediaType.APPLICATION_OCTET_STREAM; // その他のファイル形式
         }
     }
 
