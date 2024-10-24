@@ -34,8 +34,8 @@
             <p>登録データーはありません</p>
         </div>
         <table th:if="${post != null}"
-            class="border border-slate-100 col-start-1 col-span-5 row-start-3 row-span-4 grid grid-rows-4 grid-cols-6">
-            <tbody class="col-span-6 row-span-4 grid grid-rows-4 grid-cols-6">
+            class="border border-slate-100 col-start-1 col-span-5 row-start-3 row-span-4 grid grid-rows-5 grid-cols-6">
+            <tbody class="col-span-6 row-span-4 grid grid-rows-5 grid-cols-6">
                 <tr class="col-span-6 row-span-1 grid grid-cols-6 grid-rows-1">
                     <th
                         class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
@@ -53,6 +53,14 @@
                         class="border border-slate-100 col-span-1 row-span-3 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                         本文</th>
                     <td class="border border-slate-100 col-span-5 row-span-3" th:text="${post.postInfo.content}"></td>
+                </tr>
+                <tr class="col-span-6 row-span-1 grid grid-cols-6 grid-rows-1">
+                    <th
+                        class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
+                        ファイル</th>
+                    <td class="border border-slate-100 col-span-5 row-span-1"><a
+                            th:href="@{/file/{id}(id=${post.postInfo.id})}" th:text="${post.postInfo.fileName}"
+                            download></a></td>
                 </tr>
             </tbody>
         </table>
