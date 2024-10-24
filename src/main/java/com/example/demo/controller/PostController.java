@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -25,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class PostController {
 
     /** メッセージソース */
-	private final MessageSource messageSource;
+    private final MessageSource messageSource;
 
     private final PostService postService;
 
@@ -35,20 +37,29 @@ public class PostController {
     @GetMapping(UrlConst.POST)
     public String view(Model model, PostForm form) {
         model.addAttribute("departments", departmentInfoRepository.findAll());
-        model.addAttribute("postForm", form); 
+        model.addAttribute("postForm", form);
         return "post";
     }
 
     @PostMapping(UrlConst.POST)
-    public String createPost(@Validated @ModelAttribute PostForm form, BindingResult bdResult, @AuthenticationPrincipal User user, Model model) {
-        if(bdResult.hasErrors()){
+    public String createPost(@Validated @ModelAttribute PostForm form, BindingResult bdResult,
+            @AuthenticationPrincipal User user, Model model) {
+        if (bdResult.hasErrors()) {
             var message = AppUtil.getMessage(messageSource, MessageConst.FORM_ERROR);
             model.addAttribute("message", message);
             model.addAttribute("departments", departmentInfoRepository.findAll());
             return "post";
         }
-        postService.resistPostInfo(form, user);
-        return "redirect:/list";
+
+        try {
+            postService.resistPostInfo(form, user);
+            return "redirect:/list";
+        } catch (IOException e) {
+            var message = AppUtil.getMessage(messageSource, MessageConst.IO_ERROR);
+            model.addAttribute("message", message);
+            model.addAttribute("departments", departmentInfoRepository.findAll());
+            return "menu";
+        }
     }
 
 }

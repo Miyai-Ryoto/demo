@@ -17,6 +17,7 @@ import com.example.demo.repository.PostsInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -31,11 +32,13 @@ public class PostService {
     private final DepartmentInfoRepository departmentInfoRepository;
 
     @Transactional
-    public void resistPostInfo(PostForm form, User user) {
+    public void resistPostInfo(PostForm form, User user) throws IOException {
         PostInfo postInfo = new PostInfo();
         postInfo.setTitle(form.getTitle());
         postInfo.setContent(form.getContent());
         postInfo.setEventDate(form.getEventDate());
+        postInfo.setFileName(form.getFile().getOriginalFilename());
+        postInfo.setFileData(form.getFile().getBytes());
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         postInfo.setUserInfo(userInfo);
         PostInfo saveInfo = postInfoRepository.save(postInfo);

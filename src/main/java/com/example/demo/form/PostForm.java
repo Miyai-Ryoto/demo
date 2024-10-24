@@ -3,6 +3,8 @@ package com.example.demo.form;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,6 +26,8 @@ public class PostForm {
     @NotNull
     @Future
     private LocalDate eventDate;
+
+    private MultipartFile file;
 
     @NotEmpty
     private List<Long> departmentId;

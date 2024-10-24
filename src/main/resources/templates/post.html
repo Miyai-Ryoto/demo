@@ -25,27 +25,28 @@
     <div class="p-5">
         <form
             class="px-5 grid grid-cols-10 grid-rows-10 gap-x-5 bg-sky-100 border-8 border-sky-600 border-double rounded-md"
-            th:action="@{/post}" method="post" th:object="${postForm}" action="#">
+            th:action="@{/post}" method="post" th:object="${postForm}" action="#" enctype="multipart/form-data">
             <label
                 class="tracking-wide text-gray-500 text-2xl font-bold row-span-1 col-span-1 flex items-center justify-start"
                 for="title">題名</label>
             <input
-                class="shadow text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-1 col-span-10"
+                class="shadow text-gray-700 border ${#fields.hasErrors('title')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-1 col-span-10"
                 type="text" th:field="*{title}">
             <label
                 class="tracking-wide text-gray-500 text-2xl font-bold row-span-1 col-span-1 flex items-center justify-start"
                 for="content">本文</label>
             <div class="row-span-4 col-span-10 row-start-4 col-start-1 grid grid-cols-10 grid-rows-11">
                 <textarea maxlength="1000" oninput="updateCount('content', 'charCount')" rows="20" cols="50"
-                    class="shadow  h-80 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-10 col-span-10"
+                    class="shadow  h-80 text-gray-700 border ${#fields.hasErrors('content')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-span-10 col-span-10"
                     id="content" th:field="*{content}"></textarea>
                 <div id="charCount"
-                    class="flex justify-end items-start row-start-11 col-end-11 row-span-1 col-span-1 text-lg font-bold text-gray-500">0 / 1000</div>
+                    class="flex justify-end items-start row-start-11 col-end-11 row-span-1 col-span-1 text-lg font-bold text-gray-500">
+                    0 / 1000</div>
             </div>
             <label
                 class="tracking-wide text-gray-500 text-2xl font-bold row-start-8 col-start-1 row-span-1 col-span-1 flex items-center justify-start">宛先</label>
             <select
-                class="shadow text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-start-9 col-start-1 row-span-2 col-span-2 mb-3"
+                class="shadow text-gray-700 border ${#fields.hasErrors('departmentId')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 row-start-9 col-start-1 row-span-2 col-span-2 mb-3"
                 multiple name="departmentId" required>
                 <option th:each="department : ${departments}" th:value="${department.id}"
                     th:text="${department.departmentName}" th:selected="${department.id == selectedDepartmentId}">
@@ -55,8 +56,14 @@
                 class="tracking-wide text-gray-500 text-2xl font-bold col-start-3 row-start-8 row-span-1 col-span-1 flex items-center justify-start"
                 for="eventDate">回答期日</label>
             <input
-                class="shadow text-gray-700 border border-gray-200 rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-3 row-start-9 col-span-2 row-span-1"
+                class="shadow text-gray-700 border ${#fields.hasErrors('eventDate')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-3 row-start-9 col-span-2 row-span-1"
                 type="date" th:field="*{eventDate}">
+            <label
+                class="tracking-wide text-gray-500 text-2xl font-bold col-start-5 row-start-8 row-span-1 col-span-1 flex items-center justify-start"
+                for="eventDate">添付ファイル</label>
+            <input
+                class="shadow text-gray-700 border ${#fields.hasErrors('file')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-5 row-start-9 col-span-2 row-span-1"
+                type="file" th:field="*{file}">
             <button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded col-end-11 row-end-11 row-span-1 col-span-1 mb-3"
                 type="submit">送信</button>

@@ -9,6 +9,8 @@ public class MessageConst {
     public static final String SIGNUP_EXISTED_LOGIN_ID = "signup.existedLoginId";
     
 	public static final String SIGNUP_RESIST_SUCCEED = "signup.resistSucceed";
+
+    public static final String IO_ERROR = "file.uproadError";
     
 
 
