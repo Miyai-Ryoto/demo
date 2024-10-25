@@ -36,6 +36,8 @@ public class PostsInfo {
     @Column(name = "post_condition")
     private boolean condition;
 
+    private boolean read;
+
 
     public PostCondition getStatus(){
         return PostCondition.fromBoolean(condition);
