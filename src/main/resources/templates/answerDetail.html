@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>投稿詳細画面</title>
+    <link href="/output.css" rel="stylesheet">
+    <style>
+        .custom-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{'common/header' :: header}"></div>
+    <div class="grid grid-cols-5 grid-rows-8 gap-6 px-5 pb-5 pt-8">
+        <h1
+            class="flex items-center justify-start col-span-5 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-700 text-white text-2xl font-bold">
+            回答文</h1>
+        <div th:if="${answer == null}" class="col-span-5 row-span-6">
+            <p>登録データはありません</p>
+        </div>
+        <div th:if="${answer != null}" class="col-span-5 row-span-6 grid grid-col-6 grid-row-5 gap-4">
+            <table class="row-span-5 col-span-6 grid grid-rows-5 grid-cols-6 border-slate-100 border">
+                <tbody class="row-span-5 col-span-6 grid grid-rows-5 grid-cols-6">
+                    <tr class="row-span-1 col-span-6 grid grid-rows-1 grid-cols-6">
+                        <th
+                            class="row-span-1 col-span-1 bg-slate-400 text-white border-slate-100 border text-xl font-bold flex items-center justify-center">
+                            部署名</th>
+                        <td th:text="${answer.userInfo.departmentInfo.departmentName}"
+                            class="border-slate-100 border row-span-1 col-span-3 flex items-center justify-start pl-4">
+                        </td>
+                        <th
+                            class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
+                            ファイル</th>
+                        <td class="border-slate-100 border row-span-1 col-span-1 flex items-center justify-center"><a
+                                th:href="@{/answerFile/{id}(id=${answer.id})}" th:text="${answer.fileName}"
+                                download></a></td>
+                    </tr>
+                    <tr class="row-span-4 col-span-6 grid grid-rows-1 grid-cols-6">
+                        <th
+                            class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
+                            本文</th>
+                        <td th:text="${answer.content}" class="border-slate-100 border row-span-1 col-span-5 pl-4">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a th:href="@{/request}"
+            class="col-end-6 col-span-1 row-span-1 text-base text-gray-400 hover:text-gray-500 font-medium flex justify-end items-start">▶依頼詳細画面へ戻る</a>
+    </div>
+</body>
+
+</html>

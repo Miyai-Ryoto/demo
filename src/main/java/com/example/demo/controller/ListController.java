@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.constant.PostCondition;
 import com.example.demo.constant.UrlConst;
+import com.example.demo.entity.AnswerInfo;
 import com.example.demo.entity.PostInfo;
 import com.example.demo.form.AnswerForm;
 import com.example.demo.form.FindModel;
 import com.example.demo.form.SearchModel;
+import com.example.demo.repository.AnswerInfoRepository;
 import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.repository.PostInfoRepository;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -38,6 +41,8 @@ public class ListController {
     private final DepartmentInfoRepository departmentInfoRepository;
 
     private final PostInfoRepository postInfoRepository;
+
+    private final AnswerInfoRepository answerInfoRepository;
 
     @GetMapping(UrlConst.LIST)
     public String view(Model model, @AuthenticationPrincipal User user,
@@ -54,6 +59,13 @@ public class ListController {
             @ModelAttribute("target") SearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
         model.addAttribute("postsList", listService.searchPostList(user, target, pageable));
         return "list";
+    }
+
+    @GetMapping(UrlConst.DETAIL)
+    public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
+        model.addAttribute("post", listService.getPostsById(id));
+        model.addAttribute("userLists", listService.getUserListByDepartmentId(user));
+        return "postDetail";
     }
 
     @GetMapping(UrlConst.REQUEST)
@@ -78,16 +90,29 @@ public class ListController {
         return "requestDetail";
     }
 
-    @GetMapping(UrlConst.DETAIL)
-    public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
-        model.addAttribute("post", listService.getPostsById(id));
-        model.addAttribute("userLists", listService.getUserListByDepartmentId(user));
-        return "postDetail";
+    @GetMapping(UrlConst.ANSWERDETAIL)
+    public String answerDetail(Model model, @PathVariable Long id) {
+        model.addAttribute("answer", answerService.getAnswerById(id));
+        return "answerDetail";
     }
 
-    @GetMapping("/file/{id}")
+    @GetMapping("/answerFile/{id}")
     @ResponseBody
-    public ResponseEntity<byte[]> serveFile(@PathVariable Long id) {
+    public ResponseEntity<byte[]> serveAnswerFile(@PathVariable Long id) {
+        AnswerInfo answerInfo = answerInfoRepository.findById(id).orElse(null);
+        if (answerInfo != null && answerInfo.getFileData() != null) {
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + answerInfo.getFileName() + "\"")
+                    .contentType(getContentType(answerInfo.getFileName()))
+                    .body(answerInfo.getFileData());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/postFile/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> servePostFile(@PathVariable Long id) {
         PostInfo postInfo = postInfoRepository.findById(id).orElse(null);
         if (postInfo != null && postInfo.getFileData() != null) {
             return ResponseEntity.ok()
@@ -105,7 +130,7 @@ public class ListController {
         } else if (fileName.endsWith(".xlsx")) {
             return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         } else {
-            return MediaType.APPLICATION_OCTET_STREAM; // その他のファイル形式
+            return MediaType.APPLICATION_OCTET_STREAM;
         }
     }
 

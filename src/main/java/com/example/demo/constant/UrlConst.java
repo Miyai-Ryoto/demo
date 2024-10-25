@@ -35,6 +35,9 @@ public class UrlConst {
 	/** 回答 */
 	public static final String ANSWER = "/list/{id}/answer";
 
+	/** 回答詳細画面 */
+	public static final String ANSWERDETAIL = "/answer/{id}";
+
 	/** 担当者設定 */
 	public static final String RESPONSIBLE = "/list/{id}/responsible";
 

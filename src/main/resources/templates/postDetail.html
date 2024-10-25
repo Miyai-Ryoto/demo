@@ -34,7 +34,7 @@
             <p>登録データーはありません</p>
         </div>
         <table th:if="${post != null}"
-            class="border border-slate-100 col-start-1 col-span-5 row-start-3 row-span-4 grid grid-rows-5 grid-cols-6">
+            class="border border-slate-100 col-start-1 col-span-5 row-start-3 row-span-4 grid grid-rows-4 grid-cols-6">
             <tbody class="col-span-6 row-span-4 grid grid-rows-5 grid-cols-6">
                 <tr class="col-span-6 row-span-1 grid grid-cols-6 grid-rows-1">
                     <th
@@ -59,7 +59,7 @@
                         class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                         ファイル</th>
                     <td class="border border-slate-100 col-span-5 row-span-1"><a
-                            th:href="@{/file/{id}(id=${post.postInfo.id})}" th:text="${post.postInfo.fileName}"
+                            th:href="@{/postFile/{id}(id=${post.postInfo.id})}" th:text="${post.postInfo.fileName}"
                             download></a></td>
                 </tr>
             </tbody>
@@ -68,11 +68,17 @@
             class="flex items-center justify-start col-span-5 row-start-7 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
             回答</h1>
         <form th:action="@{/list/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}"
-            class="col-start-1 col-span-5 row-start-8 row-span-2 grid grid-cols-7 grid-rows-2 gap-3">
+            class="col-start-1 col-span-5 row-start-8 row-span-2 grid grid-cols-7 grid-rows-3 gap-3" enctype="multipart/form-data">
             <textarea type="text" th:field="*{content}"
                 class="row-span-1 col-span-7 shadow appearance-none text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"></textarea>
+            <label
+                class="tracking-wide text-gray-500 text-2xl font-bold col-start-1 row-start-2 row-span-1 col-span-1 flex items-center justify-start"
+                for="eventDate">添付ファイル</label>
+            <input
+                class="leading-tight focus:outline-none col-start-2 row-start-2 col-span-2 row-span-1 flex items-center justify-start"
+                type="file" th:field="*{file}">
             <button type="submit"
-                class="row-end-3 row-span-1 col-end-8 col-span-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded text-2xl">回答する</button>
+                class="row-end-4 row-span-1 col-end-8 col-span-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded text-2xl">回答する</button>
         </form>
         <a th:href="@{/list}"
             class="col-end-6 col-span-1 row-start-10 row-span-1 text-base text-gray-400 hover:text-gray-500 font-medium flex justify-end items-start">▶投稿一覧画面へ戻る</a>

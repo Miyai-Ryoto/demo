@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.io.IOException;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -29,10 +30,12 @@ public class AnswerService {
 
     private final PostInfoRepository postInfoRepository;
 
-    public void resistAnswerInfo(AnswerForm form, User user, Long id) {
+    public void resistAnswerInfo(AnswerForm form, User user, Long id) throws IOException {
 
         AnswerInfo answerInfo = new AnswerInfo();
         answerInfo.setContent(form.getContent());
+        answerInfo.setFileName(form.getFile().getOriginalFilename());
+        answerInfo.setFileData(form.getFile().getBytes());
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         answerInfo.setUserInfo(userInfo);
         PostsInfo postsInfo = postsInfoRepository.findById(id).orElse(null);
@@ -42,9 +45,13 @@ public class AnswerService {
         postsInfoRepository.save(postsInfo);
     }
 
-    public List<AnswerInfo> getAnswerListByPostId(Long id){
+    public List<AnswerInfo> getAnswerListByPostId(Long id) {
         PostInfo postInfo = postInfoRepository.findById(id).orElse(null);
         return answerInfoRepository.findByPostInfo(postInfo);
+    }
+
+    public AnswerInfo getAnswerById(Long id) {
+        return answerInfoRepository.findById(id).orElse(null);
     }
 
 }

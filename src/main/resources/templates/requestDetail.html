@@ -27,7 +27,8 @@
             <ul
                 class="row-span-1 col-span-6 flex flex-wrap space-x-4 border border-dashed border-gray-400 bg-slate-100 rounded">
                 <li th:each="post : ${request.postsInfos}" th:text="${post.departmentInfo.departmentName}"
-                    class="p-2 text-slate-500 text-sm font-semibold tracking-wide flex items-center justify-center"></li>
+                    class="p-2 text-slate-500 text-sm font-semibold tracking-wide flex items-center justify-center">
+                </li>
             </ul>
             <table class="row-span-4 col-span-6 grid grid-rows-4 grid-cols-6 border-slate-100 border">
                 <tbody class="row-span-4 col-span-6 grid grid-rows-4 grid-cols-6">
@@ -36,7 +37,8 @@
                             class="row-span-1 col-span-1 bg-slate-400 text-white border-slate-100 border text-xl font-bold flex items-center justify-center">
                             題名</th>
                         <td th:text="${request.title}"
-                            class="border-slate-100 border row-span-1 col-span-3 flex items-center justify-start pl-4"></td>
+                            class="border-slate-100 border row-span-1 col-span-3 flex items-center justify-start pl-4">
+                        </td>
                         <th
                             class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                             日付</th>
@@ -47,7 +49,8 @@
                         <th
                             class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                             本文</th>
-                        <td th:text="${request.content}" class="border-slate-100 border row-span-1 col-span-5 pl-4"></td>
+                        <td th:text="${request.content}" class="border-slate-100 border row-span-1 col-span-5 pl-4">
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -62,7 +65,8 @@
             class="col-span-5 row-span-2 overflow-y-scroll h-40 border border-gray-500">
             <table class="w-full h-5">
                 <tbody th:each="answer : ${answerList}" th:object=${answer}>
-                    <tr class="border border-slate-400 bg-slate-100">
+                    <tr style="cursor: pointer;" th:onclick="'location.href=\'/answer/' + ${answer.id} + '\';'"
+                        class="border border-slate-400 bg-slate-100">
                         <td th:text="${answer.userInfo.loginId}" class="w-1/5 pl-4"></td>
                         <td th:text="*{content}" class="w-4/5"></td>
                     </tr>
