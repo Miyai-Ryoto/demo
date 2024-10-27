@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PostCondition {
+public enum TaskCondition {
 
     ANSWERED("回答済"),
 
@@ -13,11 +13,11 @@ public enum PostCondition {
 
     private String  postMessage;
 
-    public static PostCondition fromBoolean(boolean condition){
+    public static TaskCondition fromBoolean(boolean condition){
         return condition ? ANSWERED : UNANSWERED;
     }
 
-    public static boolean toBoolean(PostCondition condition) {
+    public static boolean toBoolean(TaskCondition condition) {
         return condition == ANSWERED;
     }
 

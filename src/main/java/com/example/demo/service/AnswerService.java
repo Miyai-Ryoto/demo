@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AnswerInfo;
-import com.example.demo.entity.PostInfo;
-import com.example.demo.entity.PostsInfo;
+import com.example.demo.entity.RequestInfo;
+import com.example.demo.entity.TaskInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.AnswerForm;
 import com.example.demo.repository.AnswerInfoRepository;
-import com.example.demo.repository.PostInfoRepository;
-import com.example.demo.repository.PostsInfoRepository;
+import com.example.demo.repository.RequestInfoRepository;
+import com.example.demo.repository.TaskInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,9 +26,9 @@ public class AnswerService {
 
     private final UserInfoRepository userInfoRepository;
 
-    private final PostsInfoRepository postsInfoRepository;
+    private final TaskInfoRepository taskInfoRepository;
 
-    private final PostInfoRepository postInfoRepository;
+    private final RequestInfoRepository requestInfoRepository;
 
     public void resistAnswerInfo(AnswerForm form, User user, Long id) throws IOException {
 
@@ -38,16 +38,16 @@ public class AnswerService {
         answerInfo.setFileData(form.getFile().getBytes());
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         answerInfo.setUserInfo(userInfo);
-        PostsInfo postsInfo = postsInfoRepository.findById(id).orElse(null);
-        answerInfo.setPostInfo(postsInfo.getPostInfo());
+        TaskInfo taskInfo = taskInfoRepository.findById(id).orElse(null);
+        answerInfo.setRequestInfo(taskInfo.getRequestInfo());
         answerInfoRepository.save(answerInfo);
-        postsInfo.setCondition(true);
-        postsInfoRepository.save(postsInfo);
+        taskInfo.setCondition(true);
+        taskInfoRepository.save(taskInfo);
     }
 
     public List<AnswerInfo> getAnswerListByPostId(Long id) {
-        PostInfo postInfo = postInfoRepository.findById(id).orElse(null);
-        return answerInfoRepository.findByPostInfo(postInfo);
+        RequestInfo requestInfo = requestInfoRepository.findById(id).orElse(null);
+        return answerInfoRepository.findByRequestInfo(requestInfo);
     }
 
     public AnswerInfo getAnswerById(Long id) {

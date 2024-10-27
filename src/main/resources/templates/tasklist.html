@@ -19,7 +19,7 @@
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <div class="grid grid-cols-5 grid-rows-2 gap-4 px-5 pb-5 pt-8">
-        <form th:action="@{/list/search}" method="get" th:object="${target}"
+        <form th:action="@{/tasklist/search}" method="get" th:object="${target}"
             class="grid grid-cols-3 gap-x-4 gap-y-6 col-span-1 row-span-1 px-3 py-2 rounded bg-blue-400 shadow-xl shadow-blue-400/50">
             <input type="text" th:field="*{title}" class="col-span-3 rounded-lg border border-gray-200 p-2">
             <label for="condition" class="col-span-1 text-white font-bold text-lg">回答状況</label>

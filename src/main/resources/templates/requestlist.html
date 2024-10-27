@@ -17,7 +17,7 @@
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
     <div class="grid grid-cols-5 grid-rows-4 gap-4 px-5 pb-5 pt-8">
-        <form th:action="@{/request/search}" method="get" th:object="${target}"
+        <form th:action="@{/requestlist/search}" method="get" th:object="${target}"
             class="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-6 col-span-1 row-span-1 px-3 py-2 rounded bg-blue-400 shadow-xl shadow-blue-400/50">
             <input type="text" th:field="*{title}" class="col-span-3 row-span-1 rounded-lg border border-gray-200 p-2">
             <label for="eventDate"
@@ -35,7 +35,7 @@
             <table class="grid grid-cols-1 grid-rows-10 row-span-10 col-span-1">
                 <tbody th:each="postInfo : ${requestsList.content}" th:object=${postInfo}
                     class="grid grid-cols-1 grid-rows-1 col-span-1 row-span-1">
-                    <tr style="cursor: pointer;" th:onclick="'location.href=\'/request/' + ${postInfo.id} + '\';'"
+                    <tr style="cursor: pointer;" th:onclick="'location.href=\'/requestdetail/' + ${postInfo.id} + '\';'"
                         class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-4 bg-sky-100 hover:bg-sky-200">
                         <td th:text="*{title}"
                             class="flex items-center justify-start text-left col-span-3 row-span-1 pl-3">

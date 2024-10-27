@@ -20,7 +20,7 @@
         <h1
             class="flex items-center justify-start col-span-1 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
             依頼文</h1>
-        <form th:action="@{/list/{postId}/responsible(postId=${post.id})}" method="post" th:object="${responsibleForm}"
+        <form th:action="@{/tasklist/{postId}/responsible(postId=${post.id})}" method="post" th:object="${responsibleForm}"
             class="col-start-1 col-span-1 row-start-2 row-span-1 flex items-center justify-start gap-x-2">
             <select name="userId" class="shadow border border-gray-200 rounded py-2 px-3 leading-tight" required>
                 <option th:each="userList : ${userLists}" th:value="${userList.id}" th:text="${userList.loginId}"
@@ -67,7 +67,7 @@
         <h1
             class="flex items-center justify-start col-span-5 row-start-7 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
             回答</h1>
-        <form th:action="@{/list/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}"
+        <form th:action="@{/tasklist/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}"
             class="col-start-1 col-span-5 row-start-8 row-span-2 grid grid-cols-7 grid-rows-3 gap-3"
             enctype="multipart/form-data">
             <textarea type="text" th:field="*{content}"
@@ -81,7 +81,7 @@
             <button type="submit"
                 class="row-end-4 row-span-1 col-end-8 col-span-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded text-2xl">回答する</button>
         </form>
-        <a th:href="@{/list}"
+        <a th:href="@{/tasklist}"
             class="col-end-6 col-span-1 row-start-10 row-span-1 text-base text-gray-400 hover:text-gray-500 font-medium flex justify-end items-start">▶投稿一覧画面へ戻る</a>
     </div>
 </body>

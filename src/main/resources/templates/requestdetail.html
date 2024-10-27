@@ -65,7 +65,7 @@
             class="col-span-5 row-span-2 overflow-y-scroll h-40 border border-gray-500">
             <table class="w-full h-5">
                 <tbody th:each="answer : ${answerList}" th:object=${answer}>
-                    <tr style="cursor: pointer;" th:onclick="'location.href=\'/answer/' + ${answer.id} + '\';'"
+                    <tr style="cursor: pointer;" th:onclick="'location.href=\'/answerdetail/' + ${answer.id} + '\';'"
                         class="border border-slate-400 bg-slate-100">
                         <td th:text="${answer.userInfo.loginId}" class="w-1/5 pl-4"></td>
                         <td th:text="*{content}" class="w-4/5"></td>
@@ -73,7 +73,7 @@
                 </tbody>
             </table>
         </div>
-        <a th:href="@{/request}"
+        <a th:href="@{/requestlist}"
             class="col-end-6 col-span-1 row-span-1 text-base text-gray-400 hover:text-gray-500 font-medium flex justify-end items-start">▶依頼一覧画面へ戻る</a>
     </div>
 </body>

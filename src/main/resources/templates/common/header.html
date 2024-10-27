@@ -4,7 +4,7 @@
 <body>
     <header>
         <div class="flex items-center justify-between bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 p-6 border-b-8 border-blue-700">
-            <h1 class="text-white text-5xl font-bold">依頼・照会ポータルサイト</h1>
+            <h1 class="text-white text-5xl font-bold">依頼ポータルサイト</h1>
             <div class="flex">
                 <form th:action="@{/logout}" method="post">
                     <div class="text-2xl text-gray-500 font-semibold mb-2"
@@ -28,17 +28,7 @@
                     </svg>
                 </button>
             </div>
-            <a th:href="@{/menu}" class="flex flex-col items-center">
-                <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="5 12 3 12 12 3 21 12 19 12" />
-                    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                </svg>
-                <span class="text-2xl font-semibold text-gray-700">MENU</span>
-            </a>
-            <a th:href="@{/list}" class="flex flex-col items-center">
+            <a th:href="@{/tasklist}" class="flex flex-col items-center">
                 <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -47,7 +37,7 @@
                 </svg>
                 <span class="text-2xl font-semibold text-gray-700">LIST</span>
             </a>
-            <a th:href="@{/request}" class="flex flex-col items-center">
+            <a th:href="@{/requestlist}" class="flex flex-col items-center">
                 <svg class="h-32 w-32 text-gray-700 transition-transform duration-300 transform hover:scale-110" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" />

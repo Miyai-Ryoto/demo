@@ -34,13 +34,13 @@ public class UserInfo {
     private DepartmentInfo departmentInfo;
 
     @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PostInfo> postInfo;
+    private Set<RequestInfo> requestInfo;
 
     @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnswerInfo> answerInfos;
 
     @OneToMany(mappedBy = "userInfo" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostsInfo> postsInfos;
+    private List<TaskInfo> taskInfos;
 
 
 }

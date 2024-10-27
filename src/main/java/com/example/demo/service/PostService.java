@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.DepartmentInfo;
-import com.example.demo.entity.PostInfo;
-import com.example.demo.entity.PostsInfo;
+import com.example.demo.entity.RequestInfo;
+import com.example.demo.entity.TaskInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.PostForm;
 import com.example.demo.repository.DepartmentInfoRepository;
-import com.example.demo.repository.PostInfoRepository;
-import com.example.demo.repository.PostsInfoRepository;
+import com.example.demo.repository.RequestInfoRepository;
+import com.example.demo.repository.TaskInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,9 +23,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class PostService {
 
-    private final PostInfoRepository postInfoRepository;
+    private final RequestInfoRepository requestInfoRepository;
 
-    private final PostsInfoRepository postsInfoRepository;
+    private final TaskInfoRepository taskInfoRepository;
 
     private final UserInfoRepository userInfoRepository;
 
@@ -33,7 +33,7 @@ public class PostService {
 
     @Transactional
     public void resistPostInfo(PostForm form, User user) throws IOException {
-        PostInfo postInfo = new PostInfo();
+        RequestInfo postInfo = new RequestInfo();
         postInfo.setTitle(form.getTitle());
         postInfo.setContent(form.getContent());
         postInfo.setEventDate(form.getEventDate());
@@ -41,15 +41,15 @@ public class PostService {
         postInfo.setFileData(form.getFile().getBytes());
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         postInfo.setUserInfo(userInfo);
-        PostInfo saveInfo = postInfoRepository.save(postInfo);
+        RequestInfo saveInfo = requestInfoRepository.save(postInfo);
 
         List<Long> departmentId = form.getDepartmentId();
         for (Long departmentIds : departmentId) {
-            PostsInfo postsInfo = new PostsInfo();
+            TaskInfo taskInfo = new TaskInfo();
             DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds).orElse(null);
-            postsInfo.setDepartmentInfo(departmentInfo);
-            postsInfo.setPostInfo(saveInfo);
-            postsInfoRepository.save(postsInfo);
+            taskInfo.setDepartmentInfo(departmentInfo);
+            taskInfo.setRequestInfo(saveInfo);
+            taskInfoRepository.save(taskInfo);
         }
     }
 

@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.PostInfo;
+import com.example.demo.entity.RequestInfo;
 import com.example.demo.entity.UserInfo;
 
 
 @Repository
-public interface PostInfoRepository extends JpaRepository<PostInfo, Long>, JpaSpecificationExecutor<PostInfo> {
+public interface RequestInfoRepository extends JpaRepository<RequestInfo, Long>, JpaSpecificationExecutor<RequestInfo> {
 
-    Page<PostInfo> findByUserInfo(UserInfo userInfo, Pageable pageable);
+    Page<RequestInfo> findByUserInfo(UserInfo userInfo, Pageable pageable);
 
 }

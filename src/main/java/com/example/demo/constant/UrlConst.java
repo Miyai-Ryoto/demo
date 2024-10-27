@@ -8,38 +8,35 @@ public class UrlConst {
 	/** ユーザー登録画面 */
 	public static final String SIGNUP = "/signup";
 
-	/** メニュー画面 */
-	public static final String MENU = "/menu";
-
 	/** フォーム画面 */
 	public static final String POST = "/post";
 
 	/** 一覧画面 */
-	public static final String LIST = "/list";
+	public static final String TASKLIST = "/tasklist";
 
 	/** 検索画面 */
-	public static final String SEARCH = "/list/search";
+	public static final String TASKSEARCH = "/tasklist/search";
 
 	/** 詳細画面 */
-	public static final String DETAIL = "/list/{id}";
+	public static final String TASKDETAIL = "/taskdetail/{id}";
 
 	/** 依頼画面 */
-	public static final String REQUEST = "/request";
+	public static final String REQUESTLIST = "/requestlist";
 
 	/** 検索画面 */
-	public static final String REQUESTSEARCH = "/request/search";
+	public static final String REQUESTSEARCH = "/requestlist/search";
 
 	/** 依頼詳細画面 */
-	public static final String REQUESTDETAIL = "/request/{id}";
+	public static final String REQUESTDETAIL = "/requestdetail/{id}";
 
 	/** 回答 */
-	public static final String ANSWER = "/list/{id}/answer";
+	public static final String ANSWER = "/tasklist/{id}/answer";
 
 	/** 回答詳細画面 */
-	public static final String ANSWERDETAIL = "/answer/{id}";
+	public static final String ANSWERDETAIL = "/answerdetail/{id}";
 
 	/** 担当者設定 */
-	public static final String RESPONSIBLE = "/list/{id}/responsible";
+	public static final String RESPONSIBLE = "/tasklist/{id}/responsible";
 
 	/** 認証不要画面 */
 	public static final String[] NO_AUTHENTICATION = { LOGIN, SIGNUP,"/output.css" };

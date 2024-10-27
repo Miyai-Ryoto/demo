@@ -34,7 +34,7 @@ public class AnswerInfo {
     private UserInfo userInfo;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private PostInfo postInfo;
+    @JoinColumn(name = "request_id")
+    private RequestInfo requestInfo;
 
 }

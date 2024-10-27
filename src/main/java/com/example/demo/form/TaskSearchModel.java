@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.example.demo.constant.PostCondition;
+import com.example.demo.constant.TaskCondition;
 
 import lombok.Data;
 
 @Data
-public class SearchModel {
+public class TaskSearchModel {
 
     private String title;
 
-    private PostCondition condition;
+    private TaskCondition condition;
 
     private Long departmentId;
 

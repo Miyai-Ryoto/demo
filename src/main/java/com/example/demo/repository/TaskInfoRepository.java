@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.DepartmentInfo;
-import com.example.demo.entity.PostsInfo;
+import com.example.demo.entity.TaskInfo;
 
 @Repository
-public interface PostsInfoRepository extends JpaRepository<PostsInfo, Long>, JpaSpecificationExecutor<PostsInfo>{
+public interface TaskInfoRepository extends JpaRepository<TaskInfo, Long>, JpaSpecificationExecutor<TaskInfo>{
 
-    Page<PostsInfo> findByDepartmentInfo(DepartmentInfo departmentInfo, Pageable pageable);
+    Page<TaskInfo> findByDepartmentInfo(DepartmentInfo departmentInfo, Pageable pageable);
 }

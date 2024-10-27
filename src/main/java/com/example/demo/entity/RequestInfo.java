@@ -19,8 +19,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "post_table")
-public class PostInfo {
+@Table(name = "request_table")
+public class RequestInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,10 +43,10 @@ public class PostInfo {
     @JoinColumn(name = "user_id")
     private UserInfo userInfo;
 
-    @OneToMany(mappedBy = "postInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostsInfo> postsInfos;
+    @OneToMany(mappedBy = "requestInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TaskInfo> taskInfos;
 
-    @OneToMany(mappedBy = "postInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "requestInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnswerInfo> answerInfos;
 
 }

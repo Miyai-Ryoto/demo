@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.constant.PostCondition;
+import com.example.demo.constant.TaskCondition;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,16 +14,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "posts_table")
-public class PostsInfo {
+@Table(name = "task_table")
+public class TaskInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private PostInfo postInfo;
+    @JoinColumn(name = "request_id")
+    private RequestInfo requestInfo;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
@@ -33,15 +33,11 @@ public class PostsInfo {
     @JoinColumn(name = "user_id")
     private UserInfo userInfo;
 
-    @Column(name = "post_condition")
+    @Column(name = "task_condition")
     private boolean condition;
 
-    @Column(name = "read_condition")
-    private boolean read;
-
-
-    public PostCondition getStatus(){
-        return PostCondition.fromBoolean(condition);
+    public TaskCondition getStatus(){
+        return TaskCondition.fromBoolean(condition);
     }
 
 }

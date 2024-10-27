@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -14,17 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.constant.PostCondition;
+import com.example.demo.constant.TaskCondition;
 import com.example.demo.constant.UrlConst;
-import com.example.demo.entity.AnswerInfo;
-import com.example.demo.entity.PostInfo;
 import com.example.demo.form.AnswerForm;
-import com.example.demo.form.FindModel;
-import com.example.demo.form.SearchModel;
-import com.example.demo.repository.AnswerInfoRepository;
+import com.example.demo.form.RequestSearchModel;
+import com.example.demo.form.TaskSearchModel;
 import com.example.demo.repository.DepartmentInfoRepository;
-import com.example.demo.repository.PostInfoRepository;
 import com.example.demo.service.AnswerService;
+import com.example.demo.service.FileService;
 import com.example.demo.service.ListService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,98 +35,101 @@ public class ListController {
 
     private final DepartmentInfoRepository departmentInfoRepository;
 
-    private final PostInfoRepository postInfoRepository;
+    private final FileService fileService;
 
-    private final AnswerInfoRepository answerInfoRepository;
 
-    @GetMapping(UrlConst.LIST)
-    public String view(Model model, @AuthenticationPrincipal User user,
+    @GetMapping(UrlConst.TASKLIST)
+    public String taskListView(Model model, @AuthenticationPrincipal User user,
             @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("postsList", listService.getPostListByDepartmnetId(user, pageable));
-        model.addAttribute("target", new SearchModel());
+        model.addAttribute("postsList", listService.getTaskListByDepartmnetId(user, pageable));
+        model.addAttribute("target", new TaskSearchModel());
         model.addAttribute("departments", departmentInfoRepository.findAll());
-        model.addAttribute("conditions", PostCondition.values());
-        return "list";
+        model.addAttribute("conditions", TaskCondition.values());
+        return "tasklist";
     }
 
-    @GetMapping(UrlConst.SEARCH)
-    public String searchView(Model model, @AuthenticationPrincipal User user,
-            @ModelAttribute("target") SearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("postsList", listService.searchPostList(user, target, pageable));
-        return "list";
+    @GetMapping(UrlConst.TASKSEARCH)
+    public String taskSearchView(Model model, @AuthenticationPrincipal User user,
+            @ModelAttribute("target") TaskSearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+        model.addAttribute("postsList", listService.searchTaskList(user, target, pageable));
+        return "tasklist";
     }
 
-    @GetMapping(UrlConst.DETAIL)
-    public String postView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
-        model.addAttribute("post", listService.getPostsById(id));
+    @GetMapping(UrlConst.TASKDETAIL)
+    public String taskDetailView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
+        model.addAttribute("post", listService.getTaskById(id));
         model.addAttribute("userLists", listService.getUserListByDepartmentId(user));
-        return "postDetail";
+        return "taskdetail";
     }
 
-    @GetMapping(UrlConst.REQUEST)
-    public String requestView(Model model, @AuthenticationPrincipal User user,
+    @GetMapping(UrlConst.REQUESTLIST)
+    public String requestListView(Model model, @AuthenticationPrincipal User user,
             @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("requestsList", listService.getPostListByUserId(user, pageable));
-        model.addAttribute("target", new FindModel());
-        return "request";
+        model.addAttribute("requestsList", listService.getRequestListByUserId(user, pageable));
+        model.addAttribute("target", new RequestSearchModel());
+        return "requestlist";
     }
 
     @GetMapping(UrlConst.REQUESTSEARCH)
-    public String requestsearchView(Model model, @AuthenticationPrincipal User user,
-            @ModelAttribute("target") FindModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
+    public String requestSearchView(Model model, @AuthenticationPrincipal User user,
+            @ModelAttribute("target") RequestSearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
         model.addAttribute("requestsList", listService.searchRequestList(user, target, pageable));
-        return "request";
+        return "requestlist";
     }
 
     @GetMapping(UrlConst.REQUESTDETAIL)
-    public String requestDetail(Model model, @PathVariable Long id) {
-        model.addAttribute("request", listService.getPostById(id));
+    public String requestDetailView(Model model, @PathVariable Long id) {
+        model.addAttribute("request", listService.getRequestById(id));
         model.addAttribute("answerList", answerService.getAnswerListByPostId(id));
-        return "requestDetail";
+        return "requestdetail";
     }
 
     @GetMapping(UrlConst.ANSWERDETAIL)
-    public String answerDetail(Model model, @PathVariable Long id) {
+    public String answerDetailView(Model model, @PathVariable Long id) {
         model.addAttribute("answer", answerService.getAnswerById(id));
-        return "answerDetail";
+        return "answerdetail";
     }
 
     @GetMapping("/answerFile/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> serveAnswerFile(@PathVariable Long id) {
-        AnswerInfo answerInfo = answerInfoRepository.findById(id).orElse(null);
-        if (answerInfo != null && answerInfo.getFileData() != null) {
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + answerInfo.getFileName() + "\"")
-                    .contentType(getContentType(answerInfo.getFileName()))
-                    .body(answerInfo.getFileData());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return fileService.serveFile(id, "answer");
+        // AnswerInfo answerInfo = answerInfoRepository.findById(id).orElse(null);
+        // if (answerInfo != null && answerInfo.getFileData() != null) {
+        //     return ResponseEntity.ok()
+        //             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + answerInfo.getFileName() + "\"")
+        //             .contentType(getContentType(answerInfo.getFileName()))
+        //             .body(answerInfo.getFileData());
+        // } else {
+        //     return ResponseEntity.notFound().build();
+        // }
     }
 
     @GetMapping("/postFile/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> servePostFile(@PathVariable Long id) {
-        PostInfo postInfo = postInfoRepository.findById(id).orElse(null);
-        if (postInfo != null && postInfo.getFileData() != null) {
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + postInfo.getFileName() + "\"")
-                    .contentType(getContentType(postInfo.getFileName())) 
-                    .body(postInfo.getFileData());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return fileService.serveFile(id, "post");
+        // RequestInfo requestInfo = requestInfoRepository.findById(id).orElse(null);
+        // if (requestInfo != null && requestInfo.getFileData() != null) {
+        //     return ResponseEntity.ok()
+        //             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + requestInfo.getFileName() + "\"")
+        //             .contentType(getContentType(requestInfo.getFileName())) 
+        //             .body(requestInfo.getFileData());
+        // } else {
+        //     return ResponseEntity.notFound().build();
+        // }
     }
 
-    private MediaType getContentType(String fileName) {
-        if (fileName.endsWith(".docx")) {
-            return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-        } else if (fileName.endsWith(".xlsx")) {
-            return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        } else {
-            return MediaType.APPLICATION_OCTET_STREAM;
-        }
-    }
+    // private MediaType getContentType(String fileName) {
+    //     if (fileName.endsWith(".docx")) {
+    //        return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+    //     } else if (fileName.endsWith(".xlsx")) {
+    //        return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    //     } else {
+    //        return MediaType.APPLICATION_OCTET_STREAM;
+    //     }
+    //  }
+
+    
 
 }
