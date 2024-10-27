@@ -38,12 +38,6 @@ public class ListService {
         return postsInfoRepository.findByDepartmentInfo(departmentInfo, pageable);
     }
 
-    public List<PostsInfo> getPostListByReadAndDepartment(User user){
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
-        return postsInfoRepository.findByReadAndDepartmentInfo(false, departmentInfo);
-    }
-
     public Page<PostsInfo> searchPostList(User user, SearchModel target, Pageable pageable) {
         UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
         DepartmentInfo departmentInfo = userInfo.getDepartmentInfo();
@@ -80,12 +74,6 @@ public class ListService {
 
     public PostsInfo getPostsById(Long id) {
         return postsInfoRepository.findById(id).orElse(null);
-    }
-
-    public void markAsRead(Long id) {
-        PostsInfo postsInfo = getPostsById(id);
-        postsInfo.setRead(true);
-        postsInfoRepository.save(postsInfo);
     }
 
     public List<UserInfo> getUserListByDepartmentId(User user) {
