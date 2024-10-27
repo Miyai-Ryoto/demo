@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>メニュー</title>
@@ -12,7 +13,38 @@
         }
     </style>
 </head>
+
 <body>
     <div th:replace="~{'common/header' :: header}"></div>
+    <div class="grid grid-cols-5">
+        <h1
+            class="flex items-center justify-start col-span-5 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
+            未読一覧</h1>
+        <div th:if="${unreadList.size() == 0}" class="col-span-5 row-span-4">
+            回答データが1件もありません。
+        </div>
+        <div th:if="${unreadList.size() >= 1}"
+            class="grid grid-rows-1 grid-cols-1 col-span-5 row-span-4 overflow-y-scroll h-40 border border-gray-500">
+            <table class="grid grid-cols-1 grid-rows-10 row-span-1 col-span-1">
+                <tbody th:each="unread : ${unreadList}" th:object=${unread}
+                    class="grid grid-cols-1 grid-rows-1 col-span-1 row-span-1">
+                    <tr class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-8 bg-sky-100 hover:bg-sky-200"
+                        style="cursor: pointer;" th:onclick="'location.href=\'/list/' + ${unread.id} + '\';'">
+                        <td th:text="${unread.status.postMessage}"
+                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                        <td th:text="${unread.postInfo.title}"
+                            class="flex items-center justify-start text-left col-span-4 row-span-1"></td>
+                        <td th:text="${unread.postInfo.eventDate}"
+                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                        <td th:text="${unread.postInfo.userInfo.departmentInfo.departmentName}"
+                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                        <td th:text="${unread.userInfo != null ? postsInfo.userInfo.loginId : '担当者なし'}"
+                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
+
 </html>

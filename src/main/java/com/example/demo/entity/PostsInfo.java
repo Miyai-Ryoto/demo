@@ -36,6 +36,7 @@ public class PostsInfo {
     @Column(name = "post_condition")
     private boolean condition;
 
+    @Column(name = "read_condition")
     private boolean read;
 
 

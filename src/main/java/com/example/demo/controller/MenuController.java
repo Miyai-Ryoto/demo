@@ -19,7 +19,7 @@ public class MenuController {
 
     @GetMapping(UrlConst.MENU)
     public String view(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("unread", listService.getPostListByReadAndDepartment(user));
+        model.addAttribute("unreadList", listService.getPostListByReadAndDepartment(user));
         return "menu";
     }
 }

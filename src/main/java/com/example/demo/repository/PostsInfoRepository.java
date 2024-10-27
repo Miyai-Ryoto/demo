@@ -15,6 +15,6 @@ public interface PostsInfoRepository extends JpaRepository<PostsInfo, Long>, Jpa
 
     Page<PostsInfo> findByDepartmentInfo(DepartmentInfo departmentInfo, Pageable pageable);
 
-    List<PostsInfo> findByReadAndDepartment(boolean read, DepartmentInfo departmentInfo);
+    List<PostsInfo> findByReadAndDepartmentInfo(boolean read, DepartmentInfo departmentInfo);
 
 }
