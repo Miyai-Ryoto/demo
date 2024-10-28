@@ -94,42 +94,12 @@ public class ListController {
     @ResponseBody
     public ResponseEntity<byte[]> serveAnswerFile(@PathVariable Long id) {
         return fileService.serveFile(id, "answer");
-        // AnswerInfo answerInfo = answerInfoRepository.findById(id).orElse(null);
-        // if (answerInfo != null && answerInfo.getFileData() != null) {
-        //     return ResponseEntity.ok()
-        //             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + answerInfo.getFileName() + "\"")
-        //             .contentType(getContentType(answerInfo.getFileName()))
-        //             .body(answerInfo.getFileData());
-        // } else {
-        //     return ResponseEntity.notFound().build();
-        // }
     }
 
     @GetMapping(UrlConst.REQUESTFILE)
     @ResponseBody
     public ResponseEntity<byte[]> serveRequestFile(@PathVariable Long id) {
         return fileService.serveFile(id, "request");
-        // RequestInfo requestInfo = requestInfoRepository.findById(id).orElse(null);
-        // if (requestInfo != null && requestInfo.getFileData() != null) {
-        //     return ResponseEntity.ok()
-        //             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + requestInfo.getFileName() + "\"")
-        //             .contentType(getContentType(requestInfo.getFileName())) 
-        //             .body(requestInfo.getFileData());
-        // } else {
-        //     return ResponseEntity.notFound().build();
-        // }
     }
-
-    // private MediaType getContentType(String fileName) {
-    //     if (fileName.endsWith(".docx")) {
-    //        return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-    //     } else if (fileName.endsWith(".xlsx")) {
-    //        return MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-    //     } else {
-    //        return MediaType.APPLICATION_OCTET_STREAM;
-    //     }
-    //  }
-
-    
 
 }
