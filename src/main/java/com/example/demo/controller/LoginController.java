@@ -21,7 +21,7 @@ public class LoginController {
     private final HttpSession session;
 
     @GetMapping(UrlConst.LOGIN)
-    public String view(Model model, LoginForm form) {
+    public String loginView(Model model, LoginForm form) {
          return "login";
     }
 

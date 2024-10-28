@@ -42,7 +42,7 @@ public class SignupController {
 	 * @return　表示画面
 	 */
 	@GetMapping(UrlConst.SIGNUP)
-	public String view(Model model, SignupForm form) {
+	public String signupView(Model model, SignupForm form) {
         model.addAttribute("departments", departmentInfoRepository.findAll());
     		return "signup";
 	}

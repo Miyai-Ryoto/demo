@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SignupService {
 
-    private final UserInfoRepository repository;
+    private final UserInfoRepository userInfoRepository;
 
     private final DepartmentInfoRepository departmentInfoRepository;
 
@@ -25,7 +25,7 @@ public class SignupService {
 
 
     public Optional<UserInfo> resistUserInfo(SignupForm form) {
-        var userInfoExisteOpt = repository.findByLoginId(form.getLoginId());
+        var userInfoExisteOpt = userInfoRepository.findByLoginId(form.getLoginId());
         if (userInfoExisteOpt.isPresent()){
             return Optional.empty();
         }
@@ -37,7 +37,7 @@ public class SignupService {
         var encodedPassword = passwordEncoder.encode(form.getPassword());
         userInfo.setPassword(encodedPassword);
 
-        return Optional.of(repository.save(userInfo));
+        return Optional.of(userInfoRepository.save(userInfo));
     }
 
     

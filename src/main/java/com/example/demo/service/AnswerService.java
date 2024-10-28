@@ -10,6 +10,7 @@ import com.example.demo.entity.AnswerInfo;
 import com.example.demo.entity.RequestInfo;
 import com.example.demo.entity.TaskInfo;
 import com.example.demo.entity.UserInfo;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.form.AnswerForm;
 import com.example.demo.repository.AnswerInfoRepository;
 import com.example.demo.repository.RequestInfoRepository;
@@ -36,11 +37,19 @@ public class AnswerService {
         answerInfo.setContent(form.getContent());
         answerInfo.setFileName(form.getFile().getOriginalFilename());
         answerInfo.setFileData(form.getFile().getBytes());
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
+
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername())
+        .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
+
         answerInfo.setUserInfo(userInfo);
-        TaskInfo taskInfo = taskInfoRepository.findById(id).orElse(null);
+
+        TaskInfo taskInfo = taskInfoRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("task.not.found"));
+
         answerInfo.setRequestInfo(taskInfo.getRequestInfo());
+
         answerInfoRepository.save(answerInfo);
+        
         taskInfo.setCondition(true);
         taskInfoRepository.save(taskInfo);
     }

@@ -10,6 +10,7 @@ import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.RequestInfo;
 import com.example.demo.entity.TaskInfo;
 import com.example.demo.entity.UserInfo;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.form.PostForm;
 import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.repository.RequestInfoRepository;
@@ -33,20 +34,25 @@ public class PostService {
 
     @Transactional
     public void resistPostInfo(PostForm form, User user) throws IOException {
-        RequestInfo postInfo = new RequestInfo();
-        postInfo.setTitle(form.getTitle());
-        postInfo.setContent(form.getContent());
-        postInfo.setEventDate(form.getEventDate());
-        postInfo.setFileName(form.getFile().getOriginalFilename());
-        postInfo.setFileData(form.getFile().getBytes());
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        postInfo.setUserInfo(userInfo);
-        RequestInfo saveInfo = requestInfoRepository.save(postInfo);
+        RequestInfo requestInfo = new RequestInfo();
+        requestInfo.setTitle(form.getTitle());
+        requestInfo.setContent(form.getContent());
+        requestInfo.setEventDate(form.getEventDate());
+        requestInfo.setFileName(form.getFile().getOriginalFilename());
+        requestInfo.setFileData(form.getFile().getBytes());
+
+        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("user.not.found"));
+
+        requestInfo.setUserInfo(userInfo);
+        RequestInfo saveInfo = requestInfoRepository.save(requestInfo);
 
         List<Long> departmentId = form.getDepartmentId();
         for (Long departmentIds : departmentId) {
+            DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds)
+                    .orElseThrow(() -> new ResourceNotFoundException("department.not.found"));
+                    
             TaskInfo taskInfo = new TaskInfo();
-            DepartmentInfo departmentInfo = departmentInfoRepository.findById(departmentIds).orElse(null);
             taskInfo.setDepartmentInfo(departmentInfo);
             taskInfo.setRequestInfo(saveInfo);
             taskInfoRepository.save(taskInfo);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.constant.MessageConst;
 import com.example.demo.constant.UrlConst;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.form.PostForm;
 import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.service.PostService;
@@ -54,7 +55,11 @@ public class PostController {
         try {
             postService.resistPostInfo(form, user);
             return "redirect:/requestlist";
-        } catch (IOException e) {
+        } catch (ResourceNotFoundException ex) {
+            model.addAttribute("message", ex.getMessage());
+            model.addAttribute("departments", departmentInfoRepository.findAll());
+            return "post";
+        } catch (IOException ex) {
             var message = AppUtil.getMessage(messageSource, MessageConst.IO_ERROR);
             model.addAttribute("message", message);
             model.addAttribute("departments", departmentInfoRepository.findAll());
