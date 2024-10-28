@@ -41,9 +41,9 @@ public class ListController {
     @GetMapping(UrlConst.TASKLIST)
     public String taskListView(Model model, @AuthenticationPrincipal User user,
             @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("postsList", listService.getTaskListByDepartmnetId(user, pageable));
+        model.addAttribute("taskList", listService.getTaskListByDepartmnetId(user, pageable));
         model.addAttribute("target", new TaskSearchModel());
-        model.addAttribute("departments", departmentInfoRepository.findAll());
+        model.addAttribute("departmentList", departmentInfoRepository.findAll());
         model.addAttribute("conditions", TaskCondition.values());
         return "tasklist";
     }
@@ -51,21 +51,21 @@ public class ListController {
     @GetMapping(UrlConst.TASKSEARCH)
     public String taskSearchView(Model model, @AuthenticationPrincipal User user,
             @ModelAttribute("target") TaskSearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("postsList", listService.searchTaskList(user, target, pageable));
+        model.addAttribute("taskList", listService.searchTaskList(user, target, pageable));
         return "tasklist";
     }
 
     @GetMapping(UrlConst.TASKDETAIL)
     public String taskDetailView(Model model, @PathVariable Long id, @AuthenticationPrincipal User user, AnswerForm form) {
-        model.addAttribute("post", listService.getTaskById(id));
-        model.addAttribute("userLists", listService.getUserListByDepartmentId(user));
+        model.addAttribute("task", listService.getTaskById(id));
+        model.addAttribute("userList", listService.getUserListByDepartmentId(user));
         return "taskdetail";
     }
 
     @GetMapping(UrlConst.REQUESTLIST)
     public String requestListView(Model model, @AuthenticationPrincipal User user,
             @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("requestsList", listService.getRequestListByUserId(user, pageable));
+        model.addAttribute("requestList", listService.getRequestListByUserId(user, pageable));
         model.addAttribute("target", new RequestSearchModel());
         return "requestlist";
     }
@@ -73,7 +73,7 @@ public class ListController {
     @GetMapping(UrlConst.REQUESTSEARCH)
     public String requestSearchView(Model model, @AuthenticationPrincipal User user,
             @ModelAttribute("target") RequestSearchModel target, @PageableDefault(page = 0, size = 10) Pageable pageable) {
-        model.addAttribute("requestsList", listService.searchRequestList(user, target, pageable));
+        model.addAttribute("requestList", listService.searchRequestList(user, target, pageable));
         return "requestlist";
     }
 
@@ -90,7 +90,7 @@ public class ListController {
         return "answerdetail";
     }
 
-    @GetMapping("/answerFile/{id}")
+    @GetMapping(UrlConst.ANSWERFILE)
     @ResponseBody
     public ResponseEntity<byte[]> serveAnswerFile(@PathVariable Long id) {
         return fileService.serveFile(id, "answer");
@@ -105,10 +105,10 @@ public class ListController {
         // }
     }
 
-    @GetMapping("/postFile/{id}")
+    @GetMapping(UrlConst.REQUESTFILE)
     @ResponseBody
-    public ResponseEntity<byte[]> servePostFile(@PathVariable Long id) {
-        return fileService.serveFile(id, "post");
+    public ResponseEntity<byte[]> serveRequestFile(@PathVariable Long id) {
+        return fileService.serveFile(id, "request");
         // RequestInfo requestInfo = requestInfoRepository.findById(id).orElse(null);
         // if (requestInfo != null && requestInfo.getFileData() != null) {
         //     return ResponseEntity.ok()

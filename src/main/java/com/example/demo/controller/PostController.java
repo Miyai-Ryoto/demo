@@ -53,12 +53,12 @@ public class PostController {
 
         try {
             postService.resistPostInfo(form, user);
-            return "redirect:/list";
+            return "redirect:/requestlist";
         } catch (IOException e) {
             var message = AppUtil.getMessage(messageSource, MessageConst.IO_ERROR);
             model.addAttribute("message", message);
             model.addAttribute("departments", departmentInfoRepository.findAll());
-            return "menu";
+            return "post";
         }
     }
 

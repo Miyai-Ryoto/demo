@@ -25,9 +25,9 @@ public class AnswerController {
 
         try {
             answerService.resistAnswerInfo(form, user, id);
-            return "redirect:/list";
+            return "redirect:/tasklist";
         } catch (IOException e) {
-            return "menu";
+            return "tasklist";
         }
 
     }

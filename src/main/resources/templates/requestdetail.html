@@ -26,7 +26,7 @@
         <div th:if="${request != null}" class="col-span-5 row-span-3 grid grid-col-6 grid-row-5 gap-4">
             <ul
                 class="row-span-1 col-span-6 flex flex-wrap space-x-4 border border-dashed border-gray-400 bg-slate-100 rounded">
-                <li th:each="post : ${request.postsInfos}" th:text="${post.departmentInfo.departmentName}"
+                <li th:each="task : ${request.taskInfos}" th:text="${task.departmentInfo.departmentName}"
                     class="p-2 text-slate-500 text-sm font-semibold tracking-wide flex items-center justify-center">
                 </li>
             </ul>

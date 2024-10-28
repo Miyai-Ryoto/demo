@@ -38,6 +38,12 @@ public class UrlConst {
 	/** 担当者設定 */
 	public static final String RESPONSIBLE = "/tasklist/{id}/responsible";
 
+	/** 依頼添付ファイルダウンロード */
+	public static final String REQUESTFILE = "/requestFile/{id}";
+
+	/** 回答添付ファイルダウンロード */
+	public static final String ANSWERFILE = "/answerFile/{id}";
+
 	/** 認証不要画面 */
 	public static final String[] NO_AUTHENTICATION = { LOGIN, SIGNUP,"/output.css" };
 

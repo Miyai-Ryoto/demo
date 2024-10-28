@@ -20,20 +20,20 @@
         <h1
             class="flex items-center justify-start col-span-1 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
             依頼文</h1>
-        <form th:action="@{/tasklist/{postId}/responsible(postId=${post.id})}" method="post" th:object="${responsibleForm}"
+        <form th:action="@{/tasklist/{taskId}/responsible(taskId=${task.id})}" method="post" th:object="${responsibleForm}"
             class="col-start-1 col-span-1 row-start-2 row-span-1 flex items-center justify-start gap-x-2">
             <select name="userId" class="shadow border border-gray-200 rounded py-2 px-3 leading-tight" required>
-                <option th:each="userList : ${userLists}" th:value="${userList.id}" th:text="${userList.loginId}"
-                    th:selected="${userList.id == selectedUserListId}" class="text-sm font-bold text-gray-700">
+                <option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.loginId}"
+                    th:selected="${user.id == selectedUserId}" class="text-sm font-bold text-gray-700">
                 </option>
             </select>
             <button type="submit"
                 class="bg-slate-400 hover:bg-slate-500 text-white font-bold py-2 px-3 rounded text-sm">担当者になる</button>
         </form>
-        <div th:if="${post == null}" class="col-start-1 col-span-1 row-start-3 row-span-4">
+        <div th:if="${task == null}" class="col-start-1 col-span-1 row-start-3 row-span-4">
             <p>登録データーはありません</p>
         </div>
-        <table th:if="${post != null}"
+        <table th:if="${task != null}"
             class="border border-slate-100 col-start-1 col-span-5 row-start-3 row-span-4 grid grid-rows-4 grid-cols-6">
             <tbody class="col-span-6 row-span-4 grid grid-rows-5 grid-cols-6">
                 <tr class="col-span-6 row-span-1 grid grid-cols-6 grid-rows-1">
@@ -41,25 +41,25 @@
                         class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                         題名</th>
                     <td class="border border-slate-100 col-span-3 row-span-1 flex items-center justify-start"
-                        th:text="${post.postInfo.title}"></td>
+                        th:text="${task.requestInfo.title}"></td>
                     <th
                         class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                         日付</th>
                     <td class="border border-slate-100 col-span-1 row-span-1 flex items-center justify-center"
-                        th:text="${post.postInfo.eventDate}"></td>
+                        th:text="${task.requestInfo.eventDate}"></td>
                 </tr>
                 <tr class="col-span-6 row-span-3 grid grid-cols-6 grid-rows-1">
                     <th
                         class="border border-slate-100 col-span-1 row-span-3 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                         本文</th>
-                    <td class="border border-slate-100 col-span-5 row-span-3" th:text="${post.postInfo.content}"></td>
+                    <td class="border border-slate-100 col-span-5 row-span-3" th:text="${task.requestInfo.content}"></td>
                 </tr>
                 <tr class="col-span-6 row-span-1 grid grid-cols-6 grid-rows-1">
                     <th
                         class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
                         ファイル</th>
                     <td class="border border-slate-100 col-span-5 row-span-1"><a
-                            th:href="@{/postFile/{id}(id=${post.postInfo.id})}" th:text="${post.postInfo.fileName}"
+                            th:href="@{/requestFile/{id}(id=${task.requestInfo.id})}" th:text="${task.requestInfo.fileName}"
                             download></a></td>
                 </tr>
             </tbody>
@@ -67,7 +67,7 @@
         <h1
             class="flex items-center justify-start col-span-5 row-start-7 row-span-1 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-100 pl-3 border-b-4 border-sky-600 text-white text-2xl font-bold">
             回答</h1>
-        <form th:action="@{/tasklist/{postId}/answer(postId=${post.id})}" method="post" th:object="${answerForm}"
+        <form th:action="@{/tasklist/{taskId}/answer(taskId=${task.id})}" method="post" th:object="${answerForm}"
             class="col-start-1 col-span-5 row-start-8 row-span-2 grid grid-cols-7 grid-rows-3 gap-3"
             enctype="multipart/form-data">
             <textarea type="text" th:field="*{content}"

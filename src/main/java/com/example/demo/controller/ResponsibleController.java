@@ -19,7 +19,7 @@ public class ResponsibleController {
     @PostMapping(UrlConst.RESPONSIBLE)
     public String createResponsible(ResponsibleForm form, @PathVariable Long id) {
         responsibleService.resistResponsibleInfo(form, id);
-        return "redirect:/list";
+        return "redirect:/tasklist";
     }
 
 }
