@@ -56,6 +56,9 @@ public class AnswerService {
 
     public List<AnswerInfo> getAnswerListByPostId(Long id) {
         RequestInfo requestInfo = requestInfoRepository.findById(id).orElse(null);
+        if (requestInfo == null) {
+            return null;
+        }
         return answerInfoRepository.findByRequestInfo(requestInfo);
     }
 
