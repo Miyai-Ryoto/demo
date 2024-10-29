@@ -18,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.example.demo.constant.MessageConst;
-import com.example.demo.constant.SignupMessage;
 import com.example.demo.form.SignupForm;
 import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.service.SignupService;
