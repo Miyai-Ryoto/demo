@@ -39,7 +39,4 @@ public class SignupService {
 
         return Optional.of(userInfoRepository.save(userInfo));
     }
-
-    
-
 }
