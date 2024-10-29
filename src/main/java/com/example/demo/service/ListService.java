@@ -59,8 +59,9 @@ public class ListService {
     }
 
     public Page<RequestInfo> getRequestListByUserId(User user, Pageable pageable) {
-        UserInfo userInfo = userInfoRepository.findByLoginId(user.getUsername()).orElse(null);
-        return requestInfoRepository.findByUserInfo(userInfo, pageable);
+        DepartmentInfo departmentInfo = getDepartmentInfoByUserName(user);
+        List<UserInfo> usersInSameDepartment = userInfoRepository.findByDepartmentInfo(departmentInfo);
+        return requestInfoRepository.findByUserInfoIn(usersInSameDepartment, pageable);
     }
 
     public Page<RequestInfo> searchRequestList(User user, RequestSearchModel target, Pageable pageable){
