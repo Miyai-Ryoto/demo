@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.UserInfo;
@@ -13,6 +14,7 @@ import com.example.demo.entity.UserInfo;
 import java.util.List;
 
 @DataJpaTest
+@ActiveProfiles("test")
 public class DepartmentInfoRepositoryTest {
 
     @Autowired
