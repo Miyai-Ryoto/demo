@@ -15,7 +15,7 @@ public class TaskSpecifications {
 
     public static Specification<TaskInfo> hasTitle(String title) {
         return (root, query, criteriaBuilder) -> title == null || title.isEmpty() ? null
-                : criteriaBuilder.like(root.get("postInfo").get("title"), "%" + title + "%");
+                : criteriaBuilder.like(root.get("requestInfo").get("title"), "%" + title + "%");
     }
 
     public static Specification<TaskInfo> hasCondition(TaskCondition condition) {
@@ -25,13 +25,13 @@ public class TaskSpecifications {
 
     public static Specification<TaskInfo> hasDepartment(Long departmentId) {
         return (root, query, criteriaBuilder) -> departmentId == null ? null
-                : criteriaBuilder.equal(root.get("postInfo").get("userInfo").get("departmentInfo").get("id"),
+                : criteriaBuilder.equal(root.get("requestInfo").get("userInfo").get("departmentInfo").get("id"),
                         departmentId);
     }
 
     public static Specification<TaskInfo> startDateGreaterThanEqual(LocalDate eventDate){
         return (root, query, criteriaBuilder) -> eventDate == null ? null
-        : criteriaBuilder.greaterThanOrEqualTo(root.get("postInfo").get("eventDate"), eventDate);
+        : criteriaBuilder.greaterThanOrEqualTo(root.get("requestInfo").get("eventDate"), eventDate);
     }
 
 }
