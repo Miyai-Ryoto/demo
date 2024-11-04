@@ -4,7 +4,6 @@ import com.example.demo.constant.TaskCondition;
 import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.RequestInfo;
 import com.example.demo.entity.TaskInfo;
-import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.DepartmentInfoRepository;
 import com.example.demo.repository.RequestInfoRepository;
 import com.example.demo.repository.TaskInfoRepository;
