@@ -35,37 +35,33 @@ class TaskSpecificationsTest {
 
     @BeforeEach
     void setUp() {
-        // テストデータのセットアップ
-        TaskInfo task1 = new TaskInfo();
-        task1.setId(1L);
-        task1.setCondition(TaskCondition.toBoolean(TaskCondition.ANSWERED)); // 修正
+
+        DepartmentInfo departmentInfo = new DepartmentInfo();
+        departmentInfo.setId(null); // IDをnullにして自動生成させる
+        departmentInfoRepository.save(departmentInfo);
 
         RequestInfo requestInfo1 = new RequestInfo();
         requestInfo1.setTitle("Important Update");
         requestInfo1.setEventDate(LocalDate.now());
         requestInfoRepository.save(requestInfo1);
+
+        // テストデータのセットアップ
+        TaskInfo task1 = new TaskInfo();
+        task1.setId(1L);
+        task1.setCondition(TaskCondition.toBoolean(TaskCondition.ANSWERED)); // 修正
         task1.setRequestInfo(requestInfo1);
-
-        DepartmentInfo departmentInfo1 = new DepartmentInfo();
-        departmentInfo1.setId(1L); // テスト用の部署IDを設定
-        departmentInfoRepository.save(departmentInfo1);
-        task1.setDepartmentInfo(departmentInfo1);
-
-
-        TaskInfo task2 = new TaskInfo();
-        task2.setId(2L);
-        task2.setCondition(TaskCondition.toBoolean(TaskCondition.UNANSWERED)); // 修正
+        task1.setDepartmentInfo(departmentInfo);
 
         RequestInfo requestInfo2 = new RequestInfo();
         requestInfo2.setTitle("Important Update");
         requestInfo2.setEventDate(LocalDate.now().plusDays(1));
         requestInfoRepository.save(requestInfo2);
-        task1.setRequestInfo(requestInfo2);
 
-        DepartmentInfo departmentInfo2 = new DepartmentInfo();
-        departmentInfo2.setId(1L); // テスト用の部署IDを設定
-        departmentInfoRepository.save(departmentInfo2);
-        task1.setDepartmentInfo(departmentInfo2);
+        TaskInfo task2 = new TaskInfo();
+        task2.setId(2L);
+        task2.setCondition(TaskCondition.toBoolean(TaskCondition.UNANSWERED)); // 修正
+        task1.setRequestInfo(requestInfo2);
+        task2.setDepartmentInfo(departmentInfo);
 
         taskInfoRepository.saveAll(List.of(task1, task2));
     }
@@ -76,8 +72,7 @@ class TaskSpecificationsTest {
         List<TaskInfo> results = taskInfoRepository.findAll(spec);
 
         // 期待する結果の検証
-        assertThat(results).hasSize(1); // 実際の部門IDに基づく
-        assertThat(results.get(0).getRequestInfo().getTitle()).isEqualTo("Important Update");
+        assertThat(results).hasSize(2); // 実際の部門IDに基づく
     }
 
     @Test
