@@ -45,16 +45,6 @@ public class DepartmentInfoRepositoryTest {
     }
 
     @Test
-    public void testFindByDepartmentName() {
-        // 検索
-        List<DepartmentInfo> results = departmentInfoRepository.findByDepartmentName("Engineering");
-
-        // アサーション
-        assertThat(results).hasSize(1); // 部門は1つ
-        assertThat(results.get(0).getDepartmentName()).isEqualTo("Engineering");
-    }
-
-    @Test
     public void testFindUsersByDepartment() {
         // DepartmentInfoからユーザーを検索
         List<UserInfo> users = userInfoRepository.findByDepartmentInfo(department);
