@@ -38,9 +38,9 @@
                     <tr style="cursor: pointer;" th:onclick="'location.href=\'/requestdetail/' + ${request.id} + '\';'"
                         class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-4 bg-sky-100 hover:bg-sky-200">
                         <td th:text="*{title}"
-                            class="flex items-center justify-start text-left col-span-3 row-span-1 pl-3">
+                            class="flex items-center justify-start text-left col-span-3 row-span-1 pl-3 text-gray-500">
                         </td>
-                        <td th:text="*{eventDate}" class="flex items-center justify-center col-span-1 row-span-1"></td>
+                        <td th:text="*{eventDate}" class="flex items-center justify-center col-span-1 row-span-1 text-gray-500"></td>
                     </tr>
                 </tbody>
             </table>

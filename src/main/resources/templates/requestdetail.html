@@ -41,7 +41,7 @@
                         </td>
                         <th
                             class="border-slate-100 border row-span-1 col-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
-                            日付</th>
+                            回答期日</th>
                         <td th:text="${request.eventDate}"
                             class="border-slate-100 border row-span-1 col-span-1 flex items-center justify-center"></td>
                     </tr>
@@ -66,9 +66,9 @@
             <table class="w-full h-5">
                 <tbody th:each="answer : ${answerList}" th:object=${answer}>
                     <tr style="cursor: pointer;" th:onclick="'location.href=\'/answerdetail/' + ${answer.id} + '\';'"
-                        class="border border-slate-400 bg-slate-100">
-                        <td th:text="${answer.userInfo.loginId}" class="w-1/5 pl-4"></td>
-                        <td th:text="*{content}" class="w-4/5"></td>
+                        class="border border-slate-400 bg-sky-100 hover:bg-sky-200">
+                        <td th:text="${answer.userInfo.departmentInfo.departmentName}" class="w-1/5 pl-4 text-gray-500"></td>
+                        <td th:text="*{content}" class="w-4/5 text-gray-500"></td>
                     </tr>
                 </tbody>
             </table>

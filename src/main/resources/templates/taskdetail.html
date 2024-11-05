@@ -47,7 +47,7 @@
                         th:text="${task.requestInfo.title}"></td>
                     <th
                         class="border border-slate-100 col-span-1 row-span-1 bg-slate-400 text-white text-xl font-bold flex items-center justify-center">
-                        日付</th>
+                        回答期日</th>
                     <td class="border border-slate-100 col-span-1 row-span-1 flex items-center justify-center"
                         th:text="${task.requestInfo.eventDate}"></td>
                 </tr>
@@ -76,10 +76,10 @@
             <textarea type="text" th:field="*{content}"
                 class="row-span-1 col-span-7 shadow appearance-none text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"></textarea>
             <label
-                class="tracking-wide text-gray-500 text-2xl font-bold col-start-1 row-start-2 row-span-1 col-span-1 flex items-center justify-start"
+                class="tracking-wide text-gray-500 text-2xl font-bold col-start-1 row-start-2 row-span-1 col-span-1 flex items-start justify-start"
                 for="eventDate">添付ファイル</label>
             <input
-                class="leading-tight focus:outline-none col-start-2 row-start-2 col-span-2 row-span-1 flex items-center justify-start"
+                class="leading-tight focus:outline-none col-start-2 row-start-2 col-span-2 row-span-1"
                 type="file" th:field="*{file}">
             <button type="submit"
                 class="row-end-4 row-span-1 col-end-8 col-span-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded text-2xl">回答する</button>

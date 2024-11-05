@@ -22,18 +22,18 @@
         <form th:action="@{/tasklist/search}" method="get" th:object="${target}"
             class="grid grid-cols-3 gap-x-4 gap-y-6 col-span-1 row-span-1 px-3 py-2 rounded bg-blue-400 shadow-xl shadow-blue-400/50">
             <input type="text" th:field="*{title}" class="col-span-3 rounded-lg border border-gray-200 p-2">
-            <label for="condition" class="col-span-1 text-white font-bold text-lg">回答状況</label>
+            <label for="condition" class="col-span-1 text-white font-bold text-lg flex items-center justify-start">回答</label>
             <select th:field="*{condition}" class="col-span-2 rounded-lg border border-gray-200">
                 <option th:each="condition : ${conditions}" th:value="${condition}" th:text="${condition.postMessage}"
                     th:selected="${condition == selectedCondition}"></option>
             </select>
-            <label for="departmentId" class="col-span-1 text-white font-bold text-lg">依頼者</label>
+            <label for="departmentId" class="col-span-1 text-white font-bold text-lg flex items-center justify-start">依頼者</label>
             <select name="departmentId" class="col-span-2 rounded-lg border border-gray-200">
                 <option th:each="department : ${departmentList}" th:value="${department.id}"
                     th:text="${department.departmentName}" th:selected="${department.id == selectedDepartmentId}">
                 </option>
             </select>
-            <label for="eventDate" class="col-span-1 text-white font-bold text-lg">日付</label>
+            <label for="eventDate" class="col-span-1 text-white font-bold text-lg flex items-center justify-start">日付</label>
             <input type="text" th:field="*{eventDate}" class="col-span-2 rounded-lg border border-gray-200">
             <button type="submit"
                 class="col-start-3 bg-slate-400 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded">検索</button>
@@ -50,15 +50,15 @@
                     <tr class="border-2 border-sky-50 col-span-1 row-span-1 grid grid-rows-1 grid-cols-8 bg-sky-100 hover:bg-sky-200"
                         style="cursor: pointer;" th:onclick="'location.href=\'/taskdetail/' + ${task.id} + '\';'">
                         <td th:text="${task.status.postMessage}"
-                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                            class="flex items-center justify-center col-span-1 row-span-1 text-gray-500"></td>
                         <td th:text="${task.requestInfo.title}"
-                            class="flex items-center justify-start text-left col-span-4 row-span-1"></td>
+                            class="flex items-center justify-start text-left col-span-4 row-span-1 text-gray-500"></td>
                         <td th:text="${task.requestInfo.eventDate}"
-                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                            class="flex items-center justify-center col-span-1 row-span-1 text-gray-500"></td>
                         <td th:text="${task.requestInfo.userInfo.departmentInfo.departmentName}"
-                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                            class="flex items-center justify-center col-span-1 row-span-1 text-gray-500"></td>
                         <td th:text="${task.userInfo != null ? task.userInfo.loginId : '担当者なし'}"
-                            class="flex items-center justify-center col-span-1 row-span-1"></td>
+                            class="flex items-center justify-center col-span-1 row-span-1 text-gray-500"></td>
                     </tr>
                 </tbody>
             </table>

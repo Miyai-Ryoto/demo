@@ -59,10 +59,10 @@
                 class="shadow text-gray-700 border ${#fields.hasErrors('eventDate')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-3 row-start-9 col-span-2 row-span-1"
                 type="date" th:field="*{eventDate}">
             <label
-                class="tracking-wide text-gray-500 text-2xl font-bold col-start-5 row-start-8 row-span-1 col-span-1 flex items-center justify-start"
+                class="tracking-wide text-gray-500 text-2xl font-bold col-start-5 row-start-8 row-span-1 col-span-2 flex items-center justify-start"
                 for="eventDate">添付ファイル</label>
             <input
-                class="shadow text-gray-700 border ${#fields.hasErrors('file')} ? 'border-red-500' : 'border-gray-200' rounded py-3 px-4 mb-5 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-5 row-start-9 col-span-2 row-span-1"
+                class="text-gray-700 ${#fields.hasErrors('file')} ? 'border-red-500' : 'border-gray-200' rounded leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 col-start-5 row-start-9 col-span-2 row-span-1"
                 type="file" th:field="*{file}">
             <button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-2xl py-2 px-4 rounded col-end-11 row-end-11 row-span-1 col-span-1 mb-3"
