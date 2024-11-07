@@ -37,9 +37,6 @@ mysql/
 
 ### tailwind css ###
 node_modules/
-package-lock.json
-package.json
-tailwind.config.js
 **/src/main/**/static/*.css
 
 
