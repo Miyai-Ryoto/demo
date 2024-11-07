@@ -106,11 +106,6 @@
 			<artifactId>flatpickr</artifactId>
 			<version>4.6.13</version>
 		</dependency>
-		<!-- Spring Security on Tymeleaf -->
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
-		</dependency>
 		<!-- H2 -->
 		<dependency>
             <groupId>com.h2database</groupId>
