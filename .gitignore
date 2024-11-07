@@ -37,6 +37,5 @@ mysql/
 
 ### tailwind css ###
 node_modules/
-**/src/main/**/static/*.css
 
 
