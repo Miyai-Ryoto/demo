@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.entity.AnswerInfo;
 import com.example.demo.entity.RequestInfo;
@@ -19,6 +20,8 @@ import com.example.demo.repository.RequestInfoRepository;
 
 import java.util.Optional;
 
+
+@ActiveProfiles("test")
 class FileServiceTest {
 
     @Mock

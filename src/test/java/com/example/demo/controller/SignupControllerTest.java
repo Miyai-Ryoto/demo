@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.context.MessageSource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -24,6 +25,8 @@ import com.example.demo.service.SignupService;
 import com.example.demo.util.AppUtil;
 import com.example.demo.entity.UserInfo;
 
+
+@ActiveProfiles("test")
 public class SignupControllerTest {
 
     @InjectMocks

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
 
 import com.example.demo.entity.TaskInfo;
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")
 public class AnswerControllerTest {
 
     @InjectMocks

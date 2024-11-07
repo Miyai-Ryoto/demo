@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.entity.DepartmentInfo;
 import com.example.demo.entity.RequestInfo;
@@ -22,6 +23,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+
+@ActiveProfiles("test")
 public class ListServiceTest {
 
     @InjectMocks

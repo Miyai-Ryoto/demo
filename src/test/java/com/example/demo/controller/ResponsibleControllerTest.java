@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
 
 import com.example.demo.entity.TaskInfo;
@@ -19,6 +20,8 @@ import com.example.demo.form.ResponsibleForm;
 import com.example.demo.service.ListService;
 import com.example.demo.service.ResponsibleService;
 
+
+@ActiveProfiles("test")
 public class ResponsibleControllerTest {
 
     @InjectMocks

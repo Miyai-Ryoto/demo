@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.example.demo.entity.AnswerInfo;
 import com.example.demo.entity.RequestInfo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @DataJpaTest
@@ -29,8 +30,8 @@ public class AnswerInfoRepositoryTest {
     public void setUp() {
         // テスト用の RequestInfo を作成
         requestInfo = new RequestInfo();
-        requestInfo.setId(1L); // IDを適宜設定
-        // 必要なプロパティを設定（例: requestInfo.setName("Test");）
+        requestInfo.setTitle("Test Request"); // 必須のフィールドを設定
+        requestInfo.setEventDate(LocalDate.now()); // イベント日など設定
         requestInfoRepository.save(requestInfo); // RequestInfoを保存
     }
 

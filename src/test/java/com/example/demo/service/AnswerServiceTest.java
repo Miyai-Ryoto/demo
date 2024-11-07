@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.AnswerInfo;
@@ -29,6 +30,8 @@ import com.example.demo.repository.RequestInfoRepository;
 import com.example.demo.repository.TaskInfoRepository;
 import com.example.demo.repository.UserInfoRepository;
 
+
+@ActiveProfiles("test")
 public class AnswerServiceTest {
 
     @InjectMocks

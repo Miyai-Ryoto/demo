@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.entity.TaskInfo;
 import com.example.demo.entity.UserInfo;
@@ -18,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
+
+@ActiveProfiles("test")
 class ResponsibleServiceTest {
 
     @Mock

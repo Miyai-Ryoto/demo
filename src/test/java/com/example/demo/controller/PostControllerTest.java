@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -21,6 +22,8 @@ import com.example.demo.service.PostService;
 import java.io.IOException;
 import java.util.Collections;
 
+
+@ActiveProfiles("test")
 public class PostControllerTest {
 
     @InjectMocks
