@@ -17,11 +17,25 @@ Github：
 
 ## 使用画面のイメージ
 ### 画面遷移図
-### ホーム画面
-### 投稿一覧画面
-### 投稿詳細画面
-### 投稿作成・編集画面
-### マイページ
+![Untitled](https://github.com/user-attachments/assets/76cedcc4-3768-48d7-aaf5-e24d0317808b)
+
+### 依頼一覧画面
+![requestlist](https://github.com/user-attachments/assets/3fc858f9-d4ad-4428-857d-7214ccc6a795)
+
+### 依頼詳細画面
+![requestdetail](https://github.com/user-attachments/assets/1c8322f8-94b6-49ca-a26f-6952ba356280)
+
+### 回答詳細画面
+![answerdetail](https://github.com/user-attachments/assets/a8ee860b-0325-4064-b32b-a6cd52b734f2)
+
+### 仕事一覧画面
+![tasklist](https://github.com/user-attachments/assets/336cd731-b447-4b25-9a79-1ca05ccf44c2)
+
+### 仕事詳細画面
+![taskdetail](https://github.com/user-attachments/assets/c0ba6ba0-4e01-4b97-a99b-906599204d84)
+
+### 依頼作成画面
+![post](https://github.com/user-attachments/assets/4565d22b-81c7-401b-8c69-203be37f926c)
 
 <br>
 
@@ -61,11 +75,8 @@ Github：
 
 <br>
 
-# ⭐️ インフラ構成図
-
-<br>
-
 # ⭐️ ER図
+![ER図](https://github.com/user-attachments/assets/0e584865-780a-4001-a72a-51f96706921b)
 
 <br>
 
