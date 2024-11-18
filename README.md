@@ -1,5 +1,5 @@
 # ⭐️ アプリ概要
-### タイトル名：依頼ポータルサイト
+### タイトル名：依頼・回答アプリ
 Github：
 **[https://github.com/Miyai-Ryoto/demo](https://github.com/Miyai-Ryoto/demo)**
 
