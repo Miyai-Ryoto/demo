@@ -83,10 +83,18 @@ Github：
 # ⭐️ テーブル定義書
 概要レベルのER図を元に、テーブル定義書を作成しました。
 
-postsテーブル
-textsテーブル
-bookmarksテーブル
-usersテーブル
+部署テーブル
+![部署](https://github.com/user-attachments/assets/17be214d-74f4-4b14-a0f5-08cd7edd786c)
+社員テーブル
+![社員](https://github.com/user-attachments/assets/dc1c6d28-fd01-43ff-b7f4-c2df3250907b)
+依頼（原案）テーブル
+![依頼（原案）](https://github.com/user-attachments/assets/e4f6b7f2-6e88-4409-a3fd-1127e49f988f)
+依頼（送付）テーブル
+![依頼（送付）](https://github.com/user-attachments/assets/67b0d1fa-7020-4276-812b-92459d02a916)
+回答テーブル
+![回答](https://github.com/user-attachments/assets/62b0a3d3-6569-4db6-8502-f4c042698ccb)
+担当者テーブル
+![担当者](https://github.com/user-attachments/assets/861f15c8-637f-4dbd-bcd8-a3fdf5adbb39)
 
 <br>
 
