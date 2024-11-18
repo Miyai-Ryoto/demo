@@ -4,9 +4,8 @@ Github：
 **[https://github.com/Miyai-Ryoto/demo](https://github.com/Miyai-Ryoto/demo)**
 
 ## コンセプト
- - 自治体に向けた、庁内での依頼・照会を簡易に依頼・検索・確認できるWebアプリケーションです。
- - 特定の部署に属するユーザーに依頼し、回答状況を確認することができます。
- - 自分が属する部署の依頼処理状況及び担当者を確認することができます。
+ - 自治体での政策や計画策定時に必要となるデータを各課で共有するためのアプリです。
+ - 短時間で特定部署への依頼、及び回答を行うことができます。
 
 ## 特徴
  - 依頼又は回答からのファイルアップロード
@@ -20,21 +19,32 @@ Github：
 ![Untitled](https://github.com/user-attachments/assets/76cedcc4-3768-48d7-aaf5-e24d0317808b)
 
 ### 依頼一覧画面
+ユーザーが作成した依頼の一覧を表示します。<br>
+検索フォームでキーワード、日付から絞り込み検索をすることができます。
 ![requestlist](https://github.com/user-attachments/assets/3fc858f9-d4ad-4428-857d-7214ccc6a795)
 
 ### 依頼詳細画面
+ユーザーが作成した依頼の詳細を表示します。<br>
+他部署からの回答の一覧を表示します。
 ![requestdetail](https://github.com/user-attachments/assets/1c8322f8-94b6-49ca-a26f-6952ba356280)
 
 ### 回答詳細画面
+他部署からの回答の詳細を表示します。<br>
+ここでファイルのダウンロードが可能です。
 ![answerdetail](https://github.com/user-attachments/assets/a8ee860b-0325-4064-b32b-a6cd52b734f2)
 
 ### 仕事一覧画面
+他部署から依頼された仕事の一覧を表示します。<br>
+検索フォームでキーワード、処理状況、依頼元の部署、日付から絞り込み検索をすることができます。
 ![tasklist](https://github.com/user-attachments/assets/336cd731-b447-4b25-9a79-1ca05ccf44c2)
 
 ### 仕事詳細画面
+他部署から依頼された仕事の詳細を表示します。<br>
+ここで依頼への回答・担当者設定・ファイルのダウンロードが可能です。
 ![taskdetail](https://github.com/user-attachments/assets/c0ba6ba0-4e01-4b97-a99b-906599204d84)
 
 ### 依頼作成画面
+依頼の作成・送信ができます。
 ![post](https://github.com/user-attachments/assets/4565d22b-81c7-401b-8c69-203be37f926c)
 
 <br>
@@ -61,17 +71,16 @@ Github：
 
 ### バックエンド
 - Java 21
-- Spring Boot 3.3.5
+- Spring Boot 3.3.3
 - Spring Security 6
-- MySQL 5.5
+- MySQL 5.7
 - JUnit 5
-- Node.js 16.20.0 / npm 9.6.6
+- Node.js 20.17.0 / npm 10.8.2
 
 ### インフラ
 
-- Docker 23.0.5 / docker-compose 1.29.2（開発環境）
+- Docker 27.1.1 / docker-compose 2.29.1（開発環境）
 - Heroku
-- CircleCI 2.1
 
 <br>
 
@@ -81,7 +90,6 @@ Github：
 <br>
 
 # ⭐️ テーブル定義書
-概要レベルのER図を元に、テーブル定義書を作成しました。
 
 部署テーブル
 ![部署](https://github.com/user-attachments/assets/17be214d-74f4-4b14-a0f5-08cd7edd786c)
@@ -99,20 +107,19 @@ Github：
 <br>
 
 # ⭐️ 工夫したところ
- - ユーザーの所属部署に合わせてリストを表示。
- - 回答時の依頼処理状況の変更。（未回答⇒回答済）
- - JUnitを取り入れたバグの検知。
- - 同部署のユーザー一覧からの担当者設定。
+ - 担当者の設定と回答の状況（回答済/未回答）を表示することで、同じ部署に属する職員と依頼の処理状態を常に共有できます。
+ - 実際の現場を想定し、同じ部署に所属する職員であれば、本人以外にも担当者として設定することができます。
+ - 依頼に回答した際、処理の状態が未回答⇒回答済へと自動で変換されます。
 
 <br>
 
 # ⭐️ 苦労したところ
- - Spring Securityの実装
- - Docker-Composeの起動（結果：実装できず）
+ - DockerでSpringBootとMySQLの各コンテナを起動することはできたが、Docker-Composeの起動時にはコンテナ同士の連携ができなかった。
 
 <br>
 
 # ⭐️ 今後について
- - インフラの整備
- - ⇒Docker-Composeを起動させる
- - ⇒AWSの導入
+ - ▶インフラの強化
+ - Docker-Composeの起動/AWSの導入
+ - ▶機能の追加
+ - リアルタイム通知（各ユーザーごとに未読/既読を表示する）
