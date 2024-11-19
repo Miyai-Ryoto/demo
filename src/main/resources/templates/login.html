@@ -16,11 +16,11 @@
 
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="w-full max-w-xs">
-        <span th:text="${errorMsg}"></span>
+        <span th:text="${errorMsg}" class="text-base text-red-500"></span>
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/login}" method="post"
             th:object="${loginForm}">
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">職員番号</label>
+                <label class="block text-gray-700 text-sm font-bold mb-2">ログインID</label>
                 <input
                     class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     type="text" th:field="*{loginId}">
@@ -36,6 +36,7 @@
                     type="submit" value="ログイン">
             </div>
         </form>
+        <a th:href="@{/signup}" class="text-base text-gray-400 hover:text-gray-600">▶ユーザー登録画面へ</a>
     </div>
 </body>
 

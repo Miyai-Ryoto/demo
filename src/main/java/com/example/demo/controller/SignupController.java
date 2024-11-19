@@ -54,6 +54,7 @@ public class SignupController {
 		var message = AppUtil.getMessage(messageSource, messageId);
 		model.addAttribute("message", message);
 		model.addAttribute("isError", isError);
+		model.addAttribute("departments", departmentInfoRepository.findAll());
 	}
 
 	private SignupMessage judgeMessageKey(Optional<UserInfo> userInfoOpt) {

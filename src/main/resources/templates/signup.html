@@ -16,31 +16,26 @@
 
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="w-full max-w-xs">
-        <h2>ユーザー登録画面</h2>
-        <div th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
-            <svg>
-                <use th:if="${isError}" />
-                <use th:unless="${isError}" />
-            </svg>
-            <span th:text="${message}"></span>
+        <div th:if="${message != null}">
+            <span th:text="${message}" th:classappend="${isError} ? 'text-red-500' : 'text-green-500'" class="text-base"></span>
         </div>
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/signup}" method="post"
             th:object="${signupForm}">
             <div>
+                <span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}" class="text-base text-red-500"></span>
                 <div class="mb-4">
                     <p><label class="block text-gray-700 text-sm font-bold mb-2" for="loginId">ログインID</label>
                         <input
                             class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text" th:field="*{loginId}">
                 </div>
-                <span th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-base text-red-500"></span>
                 <div class="mb-4">
                     <p><label class="block text-gray-700 text-sm font-bold mb-2" for="password">パスワード</label>
                         <input
                             class="custom-input shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="password" th:field="*{password}">
                 </div>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 <div class="mb-6">
                     <p><label class="block text-gray-700 text-sm font-bold mb-2">部署</label>
                         <select
@@ -55,7 +50,7 @@
                         type="submit" value="ユーザー登録">
             </div>
         </form>
-        <a th:href="@{/login}">▶ログイン画面へ戻る</a>
+        <a th:href="@{/login}" class="text-base text-gray-400 hover:text-gray-600">▶ログイン画面へ</a>
     </div>
 </body>
 
