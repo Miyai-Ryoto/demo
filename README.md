@@ -92,17 +92,17 @@ Github：
 # ⭐️ テーブル定義書
 
 部署テーブル
-![部署](https://github.com/user-attachments/assets/17be214d-74f4-4b14-a0f5-08cd7edd786c)
+![部署](https://github.com/user-attachments/assets/83447d60-b418-4901-9d7d-17c80b6ac1f2)
 社員テーブル
-![社員](https://github.com/user-attachments/assets/dc1c6d28-fd01-43ff-b7f4-c2df3250907b)
+![社員](https://github.com/user-attachments/assets/9bb6e7d7-e3b4-4944-9c13-8c9ac87cf925)
 依頼（原案）テーブル
-![依頼（原案）](https://github.com/user-attachments/assets/e4f6b7f2-6e88-4409-a3fd-1127e49f988f)
+![依頼（原案）](https://github.com/user-attachments/assets/f9931844-a72f-4763-a5e8-34078deb2349)
 依頼（送付）テーブル
-![依頼（送付）](https://github.com/user-attachments/assets/67b0d1fa-7020-4276-812b-92459d02a916)
+![依頼（送付）](https://github.com/user-attachments/assets/ccb30da2-c01d-4ceb-89dc-633d17ff87fa)
 回答テーブル
-![回答](https://github.com/user-attachments/assets/62b0a3d3-6569-4db6-8502-f4c042698ccb)
+![回答](https://github.com/user-attachments/assets/49b42345-800f-4ce4-b2bc-777b4b248848)
 担当者テーブル
-![担当者](https://github.com/user-attachments/assets/861f15c8-637f-4dbd-bcd8-a3fdf5adbb39)
+![担当者](https://github.com/user-attachments/assets/89ebae9b-c2c3-4247-84ca-24fc857bb7e9)
 
 <br>
 
