@@ -1,7 +1,7 @@
 # ⭐️ アプリ概要
 ### タイトル名：依頼・回答アプリ
-Github：
-**[https://github.com/Miyai-Ryoto/demo](https://github.com/Miyai-Ryoto/demo)**
+アプリ：
+**[https://spring-ryt-de03441b2cf9.herokuapp.com/signup](https://spring-ryt-de03441b2cf9.herokuapp.com/signup)**
 
 ## コンセプト
  - 自治体での政策や計画策定時に必要となるデータを各課で共有するためのアプリです。
