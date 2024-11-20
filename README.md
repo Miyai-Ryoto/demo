@@ -85,7 +85,7 @@
 <br>
 
 # ⭐️ ER図
-![ER図](https://github.com/user-attachments/assets/fd0fb69f-09c2-405d-a7af-c8e2c240f760)
+![ER図](https://github.com/user-attachments/assets/886ff4c3-b4e8-4fc2-86e6-f477077c5886)
 
 <br>
 
